@@ -219,7 +219,7 @@ the hidden truths rise to the surface.
   <div class="story-block">3. Receive $ZTH tokens instantly</div>
 </section>
 
-<section id="tokenomics">
+section id="tokenomics">
   <h2>Tokenomics</h2>
   <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
     <strong>Total Supply:</strong> <span style="color: #a56eff;">300,000,000,000 $ZTH</span>
@@ -227,6 +227,63 @@ the hidden truths rise to the surface.
   <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
   <div class="legend" id="legend"></div>
 </section>
+
+<script>
+  const ctx = document.getElementById('tokenChart').getContext('2d');
+
+  const labels = ['Presale', 'Liquidity', 'Marketing & Growth', 'Team (Locked)', 'Development', 'Reserve'];
+  const data = [22, 23, 18, 12, 20, 5];
+  const colors = ['#9D4EDD', '#7B2CBF', '#C77DFF', '#E0AAFF', '#B100E8', '#6F38C5'];
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: '% Allocation',
+        data: data,
+        backgroundColor: colors,
+        borderRadius: 6,
+        hoverOffset: 20
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: '#ffffff', font: { weight: 'bold' } },
+          grid: { color: '#333' }
+        },
+        x: {
+          ticks: { color: '#ffffff', font: { weight: 'bold' } },
+          grid: { display: false }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const val = context.parsed.y;
+              const absolute = Math.round(val / 100 * 300000000000);
+              return `${val}% (${absolute.toLocaleString()} $ZTH)`;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // Build legend
+  const legend = document.getElementById("legend");
+  labels.forEach((label, i) => {
+    const item = document.createElement("div");
+    item.className = "legend-item";
+    item.innerHTML = `<div class="color-box" style="background:${colors[i]}"></div>${label}: ${data[i]}%`;
+    legend.appendChild(item);
+  });
+</script>
+
 
 <script>
   const ctx = document.getElementById('tokenChart').getContext('2d');
