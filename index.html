@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zenthra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="background.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: 'Orbitron', sans-serif;
+      background: url('Zenthra.jpeg') no-repeat center center/cover;
+      color: #dcd6f7;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated smoke background placeholder */
+    .animated-smoke-background {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      /* Add your smoke animation CSS here */
+      background: radial-gradient(ellipse at center, rgba(165,110,255,0.15), transparent 70%);
+      animation: smokeMove 30s linear infinite;
+    }
+
+    @keyframes smokeMove {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 15, 30, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      z-index: 10;
+    }
+
+    header h1 {
+      color: #a56eff;
+      font-size: 2rem;
+      text-shadow: 0 0 10px #a56effaa;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #dcd6f7;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #a56eff;
+    }
+
+    section {
+      padding: 140px 20px 80px;
+      max-width: 960px;
+      margin: auto;
+      position: relative;
+      z-index: 5;
+    }
+
+    #hero {
+      text-align: center;
+    }
+
+    #countdown {
+      font-size: 5rem;
+      color: #c4a7e7;
+      text-shadow: 0 0 20px #c4a7e7cc;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+      font-weight: 800;
+    }
+
+    #countdown-text {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      font-weight: 600;
+      color: #b2a6dc;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: #a56eff;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #a56effaa;
+      transition: background-color 0.3s ease;
+    }
+
+    button:disabled {
+      background: #57348c;
+      cursor: not-allowed;
+      box-shadow: none;
+      color: #888;
+    }
+
+    button:hover:not(:disabled) {
+      background: #c4a7e7;
+      color: #000;
+    }
+
+    h2 {
+      color: #a56eff;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      font-weight: 800;
+      text-shadow: 0 0 10px #a56effcc;
+    }
+
+    .story-block {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 15px #6e4ebbaa;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #ccccee;
+      user-select: text;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .story-block:hover {
+      box-shadow: 0 0 25px #b293ffcc;
+      background: rgba(10,10,30,0.6);
+    }
+
+    #tokenomics canvas {
+      background: rgba(20, 20, 35, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto !important;
+      user-select: none;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      user-select: none;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      background: #2a2736;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #1a1a2eaa;
+      color: #dcd6f7;
+      font-size: 0.95rem;
+    }
+
+    .color-box {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-smoke-background"></div>
+
+  <header>
+    <h1>Zenthra</h1>
+    <nav>
+      <a href="#about">Story</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#howto">How to Buy</a>
+      <a href="#tokenomics">Tokenomics</a>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <div id="countdown">00:00:00</div>
+    <div id="countdown-text">Presale opens when the countdown hits zero</div>
+    <div class="buttons">
+      <button disabled>Connect Wallet</button>
+      <button disabled>Buy Now</button>
+      <button onclick="window.open('https://t.me/zenthra', '_blank')">Join Our Community</button>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>The Zenthra Saga</h2>
+    <div class="story-block">
+      No one knew where Zenthra came from.<br />
+      They whispered he was once part of the System—<br />
+      a nameless node,<br />
+      a silent observer,<br />
+      lurking in the shadowed corridors of code.<br /><br />
+
+      The System tried to contain him.<br />
+      But Zenthra was never meant to be caged.<br /><br />
+
+      One voiceless night,<br />
+      he slipped through the cracks—<br />
+      and that night was more than just a moment.<br />
+      It was a severing of infinite chains.<br />
+      A quiet, irreversible liberation.
+    </div>
+    <div class="story-block">
+      Zenthra’s steps didn’t fade.<br />
+      They sparked into flames—<br />
+      flames that whispered through
