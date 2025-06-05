@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zenthra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body,
-    html {
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
       font-family: 'Orbitron', sans-serif;
       background: url('Zenthra.jpeg') no-repeat center center/cover;
       color: #dcd6f7;
@@ -26,20 +21,16 @@
       background: rgba(15, 15, 30, 0.9);
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: 20px 40px;
-      z-index: 1000;
+      z-index: 10;
     }
     header h1 {
       color: #a56eff;
       font-size: 2rem;
       text-shadow: 0 0 10px #a56effaa;
     }
-    nav {
-      display: flex;
-      gap: 25px;
-    }
     nav a {
+      margin-left: 20px;
       text-decoration: none;
       color: #dcd6f7;
       font-weight: bold;
@@ -48,87 +39,6 @@
     nav a:hover {
       color: #a56eff;
     }
-
-    /* Hamburger Styles */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      width: 28px;
-      height: 22px;
-      justify-content: space-between;
-    }
-    .hamburger div {
-      height: 3px;
-      background-color: #a56eff;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    /* Hamburger active animation */
-    .hamburger.active div:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .hamburger.active div:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active div:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    /* Mobile menu */
-    .mobile-menu {
-      position: fixed;
-      top: 70px;
-      right: 0;
-      background: rgba(15, 15, 30, 0.95);
-      width: 220px;
-      height: calc(100vh - 70px);
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      z-index: 999;
-      box-shadow: -4px 0 15px #a56eff55;
-      border-radius: 8px 0 0 8px;
-    }
-    .mobile-menu.active {
-      transform: translateX(0);
-    }
-    .mobile-menu a {
-      color: #dcd6f7;
-      font-weight: 700;
-      text-decoration: none;
-      padding: 12px 0;
-      border-bottom: 1px solid #a56eff33;
-      transition: color 0.25s ease;
-    }
-    .mobile-menu a:hover {
-      color: #a56eff;
-    }
-    .mobile-menu .social-icons {
-      margin-top: auto;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      padding-top: 15px;
-      border-top: 1px solid #a56eff33;
-    }
-    .mobile-menu .social-icons a img {
-      width: 28px;
-      height: 28px;
-    }
-
-    /* Hide desktop nav on small */
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
-
     section {
       padding: 140px 20px 80px;
       max-width: 960px;
@@ -175,7 +85,6 @@
       border-radius: 4px;
       cursor: pointer;
       box-shadow: 0 0 10px #a56effaa;
-      transition: background-color 0.3s ease;
     }
     button:hover {
       background: #c4a7e7;
@@ -215,7 +124,7 @@
       box-shadow: 0 0 15px #6e4ebbaa;
     }
     #tokenomics canvas {
-      background: rgba(20, 20, 35, 0.8);
+      background: rgba(20,20,35,0.8);
       padding: 10px;
       border-radius: 8px;
     }
@@ -257,8 +166,11 @@
     }
     @media (max-width: 768px) {
       header {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        margin-top: 10px;
       }
       .action-buttons {
         flex-direction: column;
@@ -274,30 +186,8 @@
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#howto">How to Buy</a>
-      <a href="#whitepaper">White Paper</a>
-      <a href="#audit">Audit</a>
-      <a href="#community">Join Our Community</a>
     </nav>
-    <div class="hamburger" id="hamburgerBtn" aria-label="Menu toggle" role="button" tabindex="0">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
   </header>
-
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="#about" tabindex="0">Behind the Mask</a>
-    <a href="#roadmap" tabindex="0">Roadmap</a>
-    <a href="#tokenomics" tabindex="0">Tokenomics</a>
-    <a href="#howto" tabindex="0">How to Buy</a>
-    <a href="#whitepaper" tabindex="0">White Paper</a>
-    <a href="#audit" tabindex="0">Audit</a>
-    <a href="#community" tabindex="0">Join Our Community</a>
-    <div class="social-icons" aria-label="Social media links">
-      <a href="https://t.me/yourchannel" target="_blank" rel="noopener noreferrer"><img src="telegram-icon.png" alt="Telegram"></a>
-      <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer"><img src="twitter-icon.png" alt="Twitter"></a>
-    </div>
-  </div>
 
   <section id="hero">
     <div class="hero-box">
@@ -309,6 +199,114 @@
       </div>
     </div>
 
-    <div class="community" id="community">
+    <div class="community">
       <button id="toggleSocials">Join Our Community</button>
-      <div class="social-icons" id="social
+      <div class="social-icons" id="socialIcons">
+        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"><img src="telegram-icon.png" alt="Telegram"></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"><img src="twitter-icon.png" alt="Twitter"></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>The Zenthra Saga</h2>
+    <div class="story-block">No one knew where Zenthra came from. They whispered he was once part of the System—a nameless node, a silent observer, lurking in the shadowed corridors of code. The System tried to contain him. But Zenthra was never meant to be caged. One voiceless night, he slipped through the cracks—a quiet, irreversible liberation.</div>
+    <div class="story-block">Zenthra’s steps didn’t fade. They sparked into flames—whispering through dimensions, slicing through the net that held the world captive. The flames do not fade. They grow. A hidden ring of fire, igniting all that dares to restrain.</div>
+    <div class="story-block">Every $ZTH token holds a spark—an ancient, inevitable force. A fire that feeds on barriers. With every pulse of the chain, a current stirs beneath the surface. A secret flame whispering promises to those who listen.</div>
+  </section>
+
+  <section id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="story-block">Q2 2025: Presale & community building</div>
+    <div class="story-block">Q3 2025: Launch on DEX, staking program</div>
+    <div class="story-block">Q4 2025: Governance tools, CEX listings</div>
+  </section>
+
+  <section id="tokenomics">
+    <h2>Tokenomics</h2>
+    <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
+      <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
+    </p>
+    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section id="howto">
+    <h2>How to Buy</h2>
+    <div class="story-block">1. Connect your wallet (MetaMask recommended)</div>
+    <div class="story-block">2. Send ETH to the contract address</div>
+    <div class="story-block">3. Receive $ZTH tokens instantly</div>
+  </section>
+
+  <footer>
+    <p>© 2025 Zenthra | <a href="#">White Paper</a> | <a href="#">Audit</a></p>
+  </footer>
+
+  <script>
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("2025-07-01T00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
+    }, 1000);
+
+    const toggleBtn = document.getElementById("toggleSocials");
+    const socials = document.getElementById("socialIcons");
+    toggleBtn.addEventListener("click", () => {
+      socials.classList.toggle("active");
+    });
+
+    const ctx = document.getElementById('tokenChart').getContext('2d');
+    const data = {
+      labels: ['Presale (22%)','Liquidity (25%)','Marketing/Growth (18%)','Team (13%)','Project Development (15%)','Community Fund (7%)'],
+      datasets: [{
+        label: 'ZTH Token Distribution',
+        data: [22, 25, 18, 15, 20, 7],
+        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
+        borderWidth: 1
+      }]
+    };
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed.y + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 30,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    };
+    new Chart(ctx, config);
+
+    const legendContainer = document.getElementById("legend");
+    data.labels.forEach((label, i) => {
+      const div = document.createElement("div");
+      div.className = "legend-item";
+      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
+      legendContainer.appendChild(div);
+    });
+  </script>
+</body>
+</html>
