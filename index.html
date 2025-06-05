@@ -43,7 +43,6 @@
       padding: 140px 20px 80px;
       max-width: 960px;
       margin: auto;
-      position: relative;
     }
     #hero {
       text-align: center;
@@ -123,21 +122,7 @@
       margin-bottom: 20px;
       border-radius: 6px;
       box-shadow: 0 0 15px #6e4ebbaa;
-      position: relative;
-      z-index: 1;
     }
-
-    #about::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-size: cover;
-      background-position: center;
-      z-index: 0;
-      opacity: 0.2;
-      transition: background-image 1s ease;
-    }
-
     #tokenomics canvas {
       background: rgba(20,20,35,0.8);
       padding: 10px;
@@ -225,9 +210,9 @@
 
   <section id="about">
     <h2>The Zenthra Saga</h2>
-    <div class="story-block" data-bg="zen1.jpg">No one knew where Zenthra came from...</div>
-    <div class="story-block" data-bg="zen2.jpg">Zenthra’s steps didn’t fade...</div>
-    <div class="story-block" data-bg="zen3.jpg">Every $ZTH token holds a spark...</div>
+    <div class="story-block">No one knew where Zenthra came from. They whispered he was once part of the System—a nameless node, a silent observer, lurking in the shadowed corridors of code. The System tried to contain him. But Zenthra was never meant to be caged. One voiceless night, he slipped through the cracks—a quiet, irreversible liberation.</div>
+    <div class="story-block">Zenthra’s steps didn’t fade. They sparked into flames—whispering through dimensions, slicing through the net that held the world captive. The flames do not fade. They grow. A hidden ring of fire, igniting all that dares to restrain.</div>
+    <div class="story-block">Every $ZTH token holds a spark—an ancient, inevitable force. A fire that feeds on barriers. With every pulse of the chain, a current stirs beneath the surface. A secret flame whispering promises to those who listen.</div>
   </section>
 
   <section id="roadmap">
@@ -266,26 +251,21 @@
       const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
       const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
       const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-      countdown.innerHTML = ${hours}:${minutes}:${seconds};
+      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
     }, 1000);
 
-    document.getElementById("toggleSocials").addEventListener("click", () => {
-      document.getElementById("socialIcons").classList.toggle("active");
+    const toggleBtn = document.getElementById("toggleSocials");
+    const socials = document.getElementById("socialIcons");
+    toggleBtn.addEventListener("click", () => {
+      socials.classList.toggle("active");
     });
 
     const ctx = document.getElementById('tokenChart').getContext('2d');
     const data = {
-      labels: [
-        'Presale (22%)',
-        'Liquidity Pool (25%)',
-        'Marketing / Growth (18%)',
-        'Development (15%)',
-        'Team (13%)',
-        'Community Fund (8%)'
-      ],
+      labels: ['Presale (22%)','Liquidity (23%)','Marketing/Growth (18%)','Team (12%)','Project Development (20%)','Reserve (5%)'],
       datasets: [{
         label: 'ZTH Token Distribution',
-        data: [22, 25, 18, 15, 13, 8],
+        data: [22, 23, 18, 12, 20, 5],
         backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
         borderWidth: 1
       }]
@@ -324,23 +304,9 @@
     data.labels.forEach((label, i) => {
       const div = document.createElement("div");
       div.className = "legend-item";
-      div.innerHTML = <span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label};
+      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
       legendContainer.appendChild(div);
     });
-
-    // Background changer for #about
-    const about = document.getElementById("about");
-    const blocks = about.querySelectorAll(".story-block");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const bg = entry.target.getAttribute("data-bg");
-          about.style.backgroundImage = url(${bg});
-        }
-      });
-    }, { threshold: 0.5 });
-
-    blocks.forEach(block => observer.observe(block));
   </script>
 </body>
 </html>
