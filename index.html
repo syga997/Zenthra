@@ -26,9 +26,9 @@
       background: rgba(15, 15, 30, 0.9);
       display: flex;
       justify-content: space-between;
-      padding: 20px 40px;
-      z-index: 10;
       align-items: center;
+      padding: 20px 40px;
+      z-index: 20;
     }
     header h1 {
       color: #a56eff;
@@ -37,69 +37,85 @@
     }
     nav {
       display: flex;
+      gap: 25px;
     }
     nav a {
-      margin-left: 20px;
       text-decoration: none;
       color: #dcd6f7;
       font-weight: bold;
       transition: color 0.3s ease;
+      font-size: 1rem;
     }
     nav a:hover {
       color: #a56eff;
     }
-    .hamburger-menu {
+    /* Hamburger styles */
+    .hamburger {
       display: none;
       flex-direction: column;
       cursor: pointer;
-      width: 30px;
-      height: 24px;
+      width: 28px;
+      height: 22px;
       justify-content: space-between;
     }
-    .hamburger-menu div {
-      background-color: #dcd6f7;
-      height: 4px;
+    .hamburger span {
+      display: block;
+      height: 3px;
+      background: #a56eff;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
-    /* Toggle hamburger animation when open */
-    .hamburger-menu.open div:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+    /* Mobile nav panel */
+    #mobileNav {
+      position: fixed;
+      top: 70px;
+      right: 0;
+      width: 70%;
+      max-width: 300px;
+      background: rgba(15, 15, 30, 0.95);
+      box-shadow: -4px 0 15px rgba(165, 110, 255, 0.5);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 19;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      border-radius: 8px 0 0 8px;
     }
-    .hamburger-menu.open div:nth-child(2) {
+    #mobileNav.active {
+      transform: translateX(0);
+    }
+    #mobileNav a {
+      color: #dcd6f7;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 8px;
+      transition: border-color 0.3s ease;
+    }
+    #mobileNav a:hover {
+      border-bottom: 1px solid #a56eff;
+      color: #a56eff;
+    }
+    /* Overlay when mobile menu is open */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
       opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 18;
     }
-    .hamburger-menu.open div:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
+    #overlay.active {
+      opacity: 1;
+      pointer-events: auto;
     }
-    @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: 64px;
-        right: 0;
-        background: rgba(15, 15, 30, 0.95);
-        height: calc(100vh - 64px);
-        width: 220px;
-        flex-direction: column;
-        padding-top: 20px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-      }
-      nav.open {
-        transform: translateX(0);
-      }
-      nav a {
-        margin: 15px 20px;
-        font-size: 1.2rem;
-      }
-      .hamburger-menu {
-        display: flex;
-      }
-      header {
-        padding: 20px 20px;
-      }
-    }
-    /* --- The rest of your styles unchanged --- */
     section {
       padding: 140px 20px 80px;
       max-width: 960px;
@@ -147,6 +163,7 @@
       border-radius: 4px;
       cursor: pointer;
       box-shadow: 0 0 10px #a56effaa;
+      transition: background 0.3s ease;
     }
     button:hover {
       background: #c4a7e7;
@@ -187,18 +204,23 @@
       position: relative;
       z-index: 1;
     }
+
     #about::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background-size: cover;
       background-position: center;
       z-index: 0;
       opacity: 0.2;
       transition: background-image 1s ease;
     }
+
     #tokenomics canvas {
-      background: rgba(20,20,35,0.8);
+      background: rgba(20, 20, 35, 0.8);
       padding: 10px;
       border-radius: 8px;
     }
@@ -239,6 +261,12 @@
       text-decoration: underline;
     }
     @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
       .action-buttons {
         flex-direction: column;
       }
@@ -248,18 +276,26 @@
 <body>
   <header>
     <h1>Zenthra</h1>
-    <div class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle menu" role="button" tabindex="0">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <nav id="menu" aria-label="Primary navigation">
+    <nav id="desktopNav">
       <a href="#about">Behind the Mask</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#howto">How to Buy</a>
     </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
+
+  <nav id="mobileNav">
+    <a href="#about" class="mobile-link">Behind the Mask</a>
+    <a href="#roadmap" class="mobile-link">Roadmap</a>
+    <a href="#tokenomics" class="mobile-link">Tokenomics</a>
+    <a href="#howto" class="mobile-link">How to Buy</a>
+  </nav>
+  <div id="overlay"></div>
 
   <section id="hero">
     <div class="hero-box">
@@ -274,8 +310,10 @@
     <div class="community">
       <button id="toggleSocials">Join Our Community</button>
       <div class="social-icons" id="socialIcons">
-        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"><img src="telegram-icon.png" alt="Telegram" /></a>
-        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"><img src="twitter-icon.png" alt="Twitter" /></a>
+        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"
+          ><img src="telegram-icon.png" alt="Telegram" /></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"
+          ><img src="twitter-icon.png" alt="Twitter" /></a>
       </div>
     </div>
   </section>
@@ -290,109 +328,31 @@
   <section id="roadmap">
     <h2>Roadmap</h2>
     <div class="story-block">Q2 2025: Presale & community building</div>
-    <div class="story-block">Q3 2025: Listing & partnerships</div>
-    <div class="story-block">Q4 2025: Ecosystem expansion</div>
+    <div class="story-block">Q3 2025: Launch on DEX, staking program</div>
+    <div class="story-block">Q4 2025: Governance tools, CEX listings</div>
   </section>
 
   <section id="tokenomics">
     <h2>Tokenomics</h2>
-    <canvas id="tokenomicsChart" width="400" height="400"></canvas>
-    <div class="legend">
-      <div class="legend-item"><div class="color-box" style="background:#6f42c1;"></div>Presale (22%)</div>
-      <div class="legend-item"><div class="color-box" style="background:#9f79ee;"></div>Liquidity (23%)</div>
-      <div class="legend-item"><div class="color-box" style="background:#bb86fc;"></div>Marketing/Growth (18%)</div>
-      <div class="legend-item"><div class="color-box" style="background:#c9aaff;"></div>Team (12%)</div>
-      <div class="legend-item"><div class="color-box" style="background:#d9caff;"></div>Project Development (20%)</div>
-      <div class="legend-item"><div class="color-box" style="background:#ede7f6;"></div>Reserve (5%)</div>
-    </div>
+    <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
+      <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
+    </p>
+    <canvas
+      id="tokenChart"
+      width="700"
+      height="400"
+      style="background:#181826; border-radius: 10px; padding:20px;"
+    ></canvas>
+    <div class="legend" id="legend"></div>
   </section>
 
   <section id="howto">
     <h2>How to Buy</h2>
-    <p>Instructions on how to purchase $ZTH tokens...</p>
+    <div class="story-block">1. Connect your wallet (MetaMask recommended)</div>
+    <div class="story-block">2. Send ETH to the contract address</div>
+    <div class="story-block">3. Receive $ZTH tokens instantly</div>
   </section>
 
   <footer>
-    &copy; 2025 Zenthra. All rights reserved.
-    <br />
-    <a href="#">White Paper</a> | <a href="#">Audit</a>
-  </footer>
-
-  <script>
-    // Hamburger toggle
-    const hamburgerMenu = document.getElementById('hamburgerMenu');
-    const navMenu = document.getElementById('menu');
-
-    hamburgerMenu.addEventListener('click', () => {
-      hamburgerMenu.classList.toggle('open');
-      navMenu.classList.toggle('open');
-    });
-
-    // Accessibility: toggle on Enter key
-    hamburgerMenu.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        hamburgerMenu.click();
-      }
-    });
-
-    // Toggle socials dropdown
-    const toggleSocials = document.getElementById('toggleSocials');
-    const socialIcons = document.getElementById('socialIcons');
-    toggleSocials.addEventListener('click', () => {
-      socialIcons.classList.toggle('active');
-    });
-
-    // Countdown timer (dummy example)
-    const countdownElem = document.getElementById('countdown');
-    let countdown = 3600; // 1 hour in seconds
-    setInterval(() => {
-      if (countdown > 0) {
-        countdown--;
-        let hrs = Math.floor(countdown / 3600);
-        let mins = Math.floor((countdown % 3600) / 60);
-        let secs = countdown % 60;
-        countdownElem.textContent =
-          String(hrs).padStart(2, '0') +
-          ':' +
-          String(mins).padStart(2, '0') +
-          ':' +
-          String(secs).padStart(2, '0');
-      }
-    }, 1000);
-
-    // Tokenomics Chart
-    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-    const data = {
-      labels: ['Presale', 'Liquidity', 'Marketing/Growth', 'Team', 'Project Development', 'Reserve'],
-      datasets: [
-        {
-          label: 'Token Allocation',
-          data: [22, 23, 18, 12, 20, 5],
-          backgroundColor: [
-            '#6f42c1',
-            '#9f79ee',
-            '#bb86fc',
-            '#c9aaff',
-            '#d9caff',
-            '#ede7f6',
-          ],
-          borderWidth: 1,
-        },
-      ],
-    };
-    const config = {
-      type: 'doughnut',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: true },
-        },
-      },
-    };
-    new Chart(ctx, config);
-  </script>
-</body>
-</html>
+    <p>
+     
