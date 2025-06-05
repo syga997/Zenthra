@@ -13,30 +13,7 @@
       background: url('Zenthra.jpeg') no-repeat center center/cover;
       color: #dcd6f7;
       scroll-behavior: smooth;
-      position: relative; /* új */
-      overflow-x: hidden;  /* hogy ne legyen vízszintes scroll mozgó háttér miatt */
     }
-    
-    /* MOZGÓ HÁTTÉR ELEM */
-    #moving-background {
-      position: fixed;
-      top: 0; left: 0;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, #4b00ff88, #a56eff55, #4b00ff88);
-      background-size: 400% 400%;
-      animation: moveBg 30s linear infinite;
-      z-index: 0;
-      pointer-events: none; /* ne zavarja a kattintásokat */
-      filter: blur(50px);
-    }
-
-    @keyframes moveBg {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     header {
       position: fixed;
       top: 0;
@@ -58,8 +35,6 @@
       color: #dcd6f7;
       font-weight: bold;
       transition: color 0.3s ease;
-      position: relative;
-      z-index: 11;
     }
     nav a:hover {
       color: #a56eff;
@@ -68,8 +43,6 @@
       padding: 140px 20px 80px;
       max-width: 960px;
       margin: auto;
-      position: relative;
-      z-index: 1;
     }
     #hero {
       text-align: center;
@@ -85,8 +58,6 @@
       align-items: center;
       max-width: 600px;
       margin: 0 auto 20px;
-      position: relative;
-      z-index: 1;
     }
     #countdown {
       font-size: 4rem;
@@ -129,8 +100,6 @@
     }
     .community {
       margin-top: 20px;
-      position: relative;
-      z-index: 1;
     }
     .social-icons {
       margin-top: 10px;
@@ -146,8 +115,6 @@
       text-align: center;
       margin-bottom: 30px;
       font-size: 2rem;
-      position: relative;
-      z-index: 1;
     }
     .story-block {
       background: rgba(0, 0, 0, 0.4);
@@ -155,27 +122,11 @@
       margin-bottom: 20px;
       border-radius: 6px;
       box-shadow: 0 0 15px #6e4ebbaa;
-      position: relative;
-      z-index: 1;
     }
-
-    #about::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-size: cover;
-      background-position: center;
-      z-index: 0;
-      opacity: 0.2;
-      transition: background-image 1s ease;
-    }
-
     #tokenomics canvas {
       background: rgba(20,20,35,0.8);
       padding: 10px;
       border-radius: 8px;
-      position: relative;
-      z-index: 1;
     }
     .legend {
       display: flex;
@@ -183,8 +134,6 @@
       justify-content: center;
       gap: 15px;
       margin-top: 20px;
-      position: relative;
-      z-index: 1;
     }
     .legend-item {
       display: flex;
@@ -194,31 +143,23 @@
       border-radius: 4px;
       font-weight: bold;
       box-shadow: 0 0 10px #1a1a2eaa;
-      position: relative;
-      z-index: 1;
     }
     .color-box {
       width: 20px;
       height: 20px;
       margin-right: 10px;
       border-radius: 3px;
-      position: relative;
-      z-index: 1;
     }
     footer {
       text-align: center;
       padding: 30px 10px;
       color: #777;
       font-size: 0.9rem;
-      position: relative;
-      z-index: 1;
     }
     footer a {
       color: #a56eff;
       margin: 0 10px;
       text-decoration: none;
-      position: relative;
-      z-index: 1;
     }
     footer a:hover {
       text-decoration: underline;
@@ -238,8 +179,6 @@
   </style>
 </head>
 <body>
-  <div id="moving-background"></div>
-
   <header>
     <h1>Zenthra</h1>
     <nav>
@@ -271,9 +210,9 @@
 
   <section id="about">
     <h2>The Zenthra Saga</h2>
-    <div class="story-block" data-bg="zen1.jpg">No one knew where Zenthra came from...</div>
-    <div class="story-block" data-bg="zen2.jpg">Zenthra’s steps didn’t fade...</div>
-    <div class="story-block" data-bg="zen3.jpg">Every $ZTH token holds a spark...</div>
+    <div class="story-block">No one knew where Zenthra came from. They whispered he was once part of the System—a nameless node, a silent observer, lurking in the shadowed corridors of code. The System tried to contain him. But Zenthra was never meant to be caged. One voiceless night, he slipped through the cracks—a quiet, irreversible liberation.</div>
+    <div class="story-block">Zenthra’s steps didn’t fade. They sparked into flames—whispering through dimensions, slicing through the net that held the world captive. The flames do not fade. They grow. A hidden ring of fire, igniting all that dares to restrain.</div>
+    <div class="story-block">Every $ZTH token holds a spark—an ancient, inevitable force. A fire that feeds on barriers. With every pulse of the chain, a current stirs beneath the surface. A secret flame whispering promises to those who listen.</div>
   </section>
 
   <section id="roadmap">
@@ -300,4 +239,74 @@
   </section>
 
   <footer>
-    <p>© 2025 Zenthra | <a
+    <p>© 2025 Zenthra | <a href="#">White Paper</a> | <a href="#">Audit</a></p>
+  </footer>
+
+  <script>
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("2025-07-01T00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
+    }, 1000);
+
+    const toggleBtn = document.getElementById("toggleSocials");
+    const socials = document.getElementById("socialIcons");
+    toggleBtn.addEventListener("click", () => {
+      socials.classList.toggle("active");
+    });
+
+    const ctx = document.getElementById('tokenChart').getContext('2d');
+    const data = {
+      labels: ['Presale (22%)','Liquidity (25%)','Marketing/Growth (18%)','Team (13%)','Project Development (15%)','Community Fund (7%)'],
+      datasets: [{
+        label: 'ZTH Token Distribution',
+        data: [22, 25, 18, 15, 20, 7],
+        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
+        borderWidth: 1
+      }]
+    };
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed.y + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 30,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    };
+    new Chart(ctx, config);
+
+    const legendContainer = document.getElementById("legend");
+    data.labels.forEach((label, i) => {
+      const div = document.createElement("div");
+      div.className = "legend-item";
+      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
+      legendContainer.appendChild(div);
+    });
+  </script>
+</body>
+</html>
