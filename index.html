@@ -8,11 +8,24 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html {
+    html, body {
+      height: 100%;
       font-family: 'Orbitron', sans-serif;
-      background: url('Zenthra.jpeg') no-repeat center center/cover;
       color: #dcd6f7;
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      position: relative;
+      background: #0f0f1e; /* sötét alapszín, háttérképet eltávolítottam */
+    }
+    /* Mozgó háttér canvas */
+    #backgroundCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: #0f0f1e;
     }
     header {
       position: fixed;
@@ -43,6 +56,8 @@
       padding: 140px 20px 80px;
       max-width: 960px;
       margin: auto;
+      position: relative;
+      z-index: 5; /* hogy a canvas fölött legyen */
     }
     #hero {
       text-align: center;
@@ -58,6 +73,8 @@
       align-items: center;
       max-width: 600px;
       margin: 0 auto 20px;
+      position: relative;
+      z-index: 5;
     }
     #countdown {
       font-size: 4rem;
@@ -155,6 +172,8 @@
       padding: 30px 10px;
       color: #777;
       font-size: 0.9rem;
+      position: relative;
+      z-index: 5;
     }
     footer a {
       color: #a56eff;
@@ -179,6 +198,9 @@
   </style>
 </head>
 <body>
+  <!-- Mozgó háttér canvas -->
+  <canvas id="backgroundCanvas"></canvas>
+
   <header>
     <h1>Zenthra</h1>
     <nav>
@@ -234,79 +256,4 @@
   <section id="howto">
     <h2>How to Buy</h2>
     <div class="story-block">1. Connect your wallet (MetaMask recommended)</div>
-    <div class="story-block">2. Send ETH to the contract address</div>
-    <div class="story-block">3. Receive $ZTH tokens instantly</div>
-  </section>
-
-  <footer>
-    <p>© 2025 Zenthra | <a href="#">White Paper</a> | <a href="#">Audit</a></p>
-  </footer>
-
-  <script>
-    const countdown = document.getElementById("countdown");
-    const targetDate = new Date("2025-07-01T00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
-    }, 1000);
-
-    const toggleBtn = document.getElementById("toggleSocials");
-    const socials = document.getElementById("socialIcons");
-    toggleBtn.addEventListener("click", () => {
-      socials.classList.toggle("active");
-    });
-
-    const ctx = document.getElementById('tokenChart').getContext('2d');
-    const data = {
-      labels: ['Presale (22%)','Liquidity (25%)','Marketing/Growth (18%)','Team (13%)','Project Development (15%)','Community Fund (7%)'],
-      datasets: [{
-        label: 'ZTH Token Distribution',
-        data: [22, 25, 18, 15, 20, 7],
-        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
-        borderWidth: 1
-      }]
-    };
-    const config = {
-      type: 'bar',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.label + ': ' + context.parsed.y + '%';
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 30,
-            ticks: {
-              callback: function(value) {
-                return value + '%';
-              }
-            }
-          }
-        }
-      }
-    };
-    new Chart(ctx, config);
-
-    const legendContainer = document.getElementById("legend");
-    data.labels.forEach((label, i) => {
-      const div = document.createElement("div");
-      div.className = "legend-item";
-      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
-      legendContainer.appendChild(div);
-    });
-  </script>
-</body>
-</html>
+    <div class="story-block">2
