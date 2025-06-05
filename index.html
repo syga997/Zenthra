@@ -1,110 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zenthra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
+      font-family: 'Orbitron', sans-serif;
+      background: url('Zenthra.jpeg') no-repeat center center/cover;
+      color: #dcd6f7;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 15, 30, 0.9);
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+      z-index: 10;
+    }
+    header h1 {
+      color: #a56eff;
+      font-size: 2rem;
+      text-shadow: 0 0 10px #a56effaa;
+    }
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #dcd6f7;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #a56eff;
     }
     section {
-      padding: 50px;
+      padding: 140px 20px 80px;
+      max-width: 960px;
+      margin: auto;
+      position: relative;
+    }
+    #hero {
       text-align: center;
     }
-    canvas {
-      background: white;
-      border-radius: 10px;
+    .hero-box {
+      background: rgba(30, 20, 50, 0.75);
+      border: 2px solid #a56eff55;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 20px #a56eff66;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       max-width: 600px;
       margin: 0 auto 20px;
+    }
+    #countdown {
+      font-size: 4rem;
+      color: #c4a7e7;
+      text-shadow: 0 0 20px #c4a7e7cc;
+      margin-bottom: 10px;
+    }
+    #countdown-text {
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    button {
+      background: #a56eff;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #a56effaa;
+    }
+    button:hover {
+      background: #c4a7e7;
+    }
+    .icon-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .icon-button img {
+      width: 28px;
+      height: 28px;
+    }
+    .community {
+      margin-top: 20px;
+    }
+    .social-icons {
+      margin-top: 10px;
+      display: none;
+      gap: 10px;
+      justify-content: center;
+    }
+    .social-icons.active {
+      display: flex;
+    }
+    h2 {
+      color: #a56eff;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    .story-block {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 15px #6e4ebbaa;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* BACKGROUND ANIMATION CONTAINER FOR 'Behind the Mask' */
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      opacity: 0.2;
+      transition: background-image 1s ease;
+    }
+
+    #tokenomics canvas {
+      background: rgba(20,20,35,0.8);
+      padding: 10px;
+      border-radius: 8px;
     }
     .legend {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
+      gap: 15px;
+      margin-top: 20px;
     }
-    .legend div {
+    .legend-item {
       display: flex;
       align-items: center;
-      gap: 5px;
+      background: #2a2736;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #1a1a2eaa;
     }
-    .legend .color-box {
-      width: 15px;
-      height: 15px;
-      display: inline-block;
+    .color-box {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-radius: 3px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #a56eff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        margin-top: 10px;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Zenthra</h1>
+    <nav>
+      <a href="#about">Behind the Mask</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#howto">How to Buy</a>
+    </nav>
+  </header>
 
-  <!-- Other sections remain unchanged -->
+  <section id="hero">
+    <div class="hero-box">
+      <div id="countdown">00:00:00</div>
+      <div id="countdown-text">Presale opens when the countdown hits zero</div>
+      <div class="action-buttons">
+        <button disabled>Connect Wallet</button>
+        <button disabled>Buy Now</button>
+      </div>
+    </div>
 
-  <section id="tokenomics">
-    <h2>Tokenomics</h2>
-    <canvas id="tokenomicsChart"></canvas>
-    <div id="tokenomicsLegend" class="legend"></div>
+    <div class="community">
+      <button id="toggleSocials">Join Our Community</button>
+      <div class="social-icons" id="socialIcons">
+        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"><img src="telegram-icon.png" alt="Telegram"></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"><img src="twitter-icon.png" alt="Twitter"></a>
+      </div>
+    </div>
   </section>
 
-  <script>
-    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-    const data = {
-      labels: [
-        'Presale',
-        'Liquidity',
-        'Marketing/Growth',
-        'Development',
-        'Team (locked)',
-        'Community Fund'
-      ],
-      datasets: [{
-        label: 'Token Distribution',
-        data: [33000000000, 37500000000, 28500000000, 24000000000, 15000000000, 12000000000],
-        backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#4BC0C0',
-          '#9966FF',
-          '#FF9F40'
-        ]
-      }]
-    };
+  <section id="about">
+    <h2>The Zenthra Saga</h2>
+    <div class="story-block" data-bg="zen1.jpg">No one knew where Zenthra came from. They whispered he was once part of the System—a nameless node, a silent observer, lurking in the shadowed corridors of code. The System tried to contain him. But Zenthra was never meant to be caged. One voiceless night, he slipped through the cracks—a quiet, irreversible liberation.</div>
+    <div class="story-block" data-bg="zen2.jpg">Zenthra’s steps didn’t fade. They sparked into flames—whispering through dimensions, slicing through the net that held the world captive. The flames do not fade. They grow. A hidden ring of fire, igniting all that dares to restrain.</div>
+    <div class="story-block" data-bg="zen3.jpg">Every $ZTH token holds a spark—an ancient, inevitable force. A fire that feeds on barriers. With every pulse of the chain, a current stirs beneath the surface. A secret flame whispering promises to those who listen.</div>
+  </section>
 
-    const config = {
-      type: 'doughnut',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                const value = context.raw.toLocaleString();
-                return `${context.label}: ${value}`;
-              }
-            }
-          }
-        }
-      }
-    };
-
-    const tokenomicsChart = new Chart(ctx, config);
-
-    // Generate legend manually
-    const legendContainer = document.getElementById('tokenomicsLegend');
-    data.labels.forEach((label, i) => {
-      const div = document.createElement('div');
-      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
-      legendContainer.appendChild(div);
-    });
-  </script>
-
-</body>
-</html>
+  <section id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="story-block">Q2 2025: Presale & community building</div>
+    <div class="story-block">Q3 2025: Launch on DEX, staking program</div>
+    <div class="story-block">Q4 2025: Governance tools
