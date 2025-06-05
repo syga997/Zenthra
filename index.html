@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zenthra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body,
-    html {
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
       font-family: 'Orbitron', sans-serif;
       background: url('Zenthra.jpeg') no-repeat center center/cover;
       color: #dcd6f7;
@@ -26,95 +21,23 @@
       background: rgba(15, 15, 30, 0.9);
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: 20px 40px;
-      z-index: 20;
+      z-index: 10;
     }
     header h1 {
       color: #a56eff;
       font-size: 2rem;
       text-shadow: 0 0 10px #a56effaa;
     }
-    nav {
-      display: flex;
-      gap: 25px;
-    }
     nav a {
+      margin-left: 20px;
       text-decoration: none;
       color: #dcd6f7;
       font-weight: bold;
       transition: color 0.3s ease;
-      font-size: 1rem;
     }
     nav a:hover {
       color: #a56eff;
-    }
-    /* Hamburger styles */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      width: 28px;
-      height: 22px;
-      justify-content: space-between;
-    }
-    .hamburger span {
-      display: block;
-      height: 3px;
-      background: #a56eff;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    /* Mobile nav panel */
-    #mobileNav {
-      position: fixed;
-      top: 70px;
-      right: 0;
-      width: 70%;
-      max-width: 300px;
-      background: rgba(15, 15, 30, 0.95);
-      box-shadow: -4px 0 15px rgba(165, 110, 255, 0.5);
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 19;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-      border-radius: 8px 0 0 8px;
-    }
-    #mobileNav.active {
-      transform: translateX(0);
-    }
-    #mobileNav a {
-      color: #dcd6f7;
-      font-size: 1.2rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 8px;
-      transition: border-color 0.3s ease;
-    }
-    #mobileNav a:hover {
-      border-bottom: 1px solid #a56eff;
-      color: #a56eff;
-    }
-    /* Overlay when mobile menu is open */
-    #overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 18;
-    }
-    #overlay.active {
-      opacity: 1;
-      pointer-events: auto;
     }
     section {
       padding: 140px 20px 80px;
@@ -163,7 +86,6 @@
       border-radius: 4px;
       cursor: pointer;
       box-shadow: 0 0 10px #a56effaa;
-      transition: background 0.3s ease;
     }
     button:hover {
       background: #c4a7e7;
@@ -208,10 +130,7 @@
     #about::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background-size: cover;
       background-position: center;
       z-index: 0;
@@ -220,7 +139,7 @@
     }
 
     #tokenomics canvas {
-      background: rgba(20, 20, 35, 0.8);
+      background: rgba(20,20,35,0.8);
       padding: 10px;
       border-radius: 8px;
     }
@@ -261,11 +180,12 @@
       text-decoration: underline;
     }
     @media (max-width: 768px) {
-      nav {
-        display: none;
+      header {
+        flex-direction: column;
+        align-items: center;
       }
-      .hamburger {
-        display: flex;
+      nav {
+        margin-top: 10px;
       }
       .action-buttons {
         flex-direction: column;
@@ -276,26 +196,13 @@
 <body>
   <header>
     <h1>Zenthra</h1>
-    <nav id="desktopNav">
+    <nav>
       <a href="#about">Behind the Mask</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#howto">How to Buy</a>
     </nav>
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
   </header>
-
-  <nav id="mobileNav">
-    <a href="#about" class="mobile-link">Behind the Mask</a>
-    <a href="#roadmap" class="mobile-link">Roadmap</a>
-    <a href="#tokenomics" class="mobile-link">Tokenomics</a>
-    <a href="#howto" class="mobile-link">How to Buy</a>
-  </nav>
-  <div id="overlay"></div>
 
   <section id="hero">
     <div class="hero-box">
@@ -310,10 +217,8 @@
     <div class="community">
       <button id="toggleSocials">Join Our Community</button>
       <div class="social-icons" id="socialIcons">
-        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"
-          ><img src="telegram-icon.png" alt="Telegram" /></a>
-        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"
-          ><img src="twitter-icon.png" alt="Twitter" /></a>
+        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"><img src="telegram-icon.png" alt="Telegram"></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"><img src="twitter-icon.png" alt="Twitter"></a>
       </div>
     </div>
   </section>
@@ -337,12 +242,7 @@
     <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
       <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
     </p>
-    <canvas
-      id="tokenChart"
-      width="700"
-      height="400"
-      style="background:#181826; border-radius: 10px; padding:20px;"
-    ></canvas>
+    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
     <div class="legend" id="legend"></div>
   </section>
 
@@ -354,5 +254,93 @@
   </section>
 
   <footer>
-    <p>
-     
+    <p>© 2025 Zenthra | <a href="#">White Paper</a> | <a href="#">Audit</a></p>
+  </footer>
+
+  <script>
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("2025-07-01T00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+      countdown.innerHTML = ${hours}:${minutes}:${seconds};
+    }, 1000);
+
+    document.getElementById("toggleSocials").addEventListener("click", () => {
+      document.getElementById("socialIcons").classList.toggle("active");
+    });
+
+    const ctx = document.getElementById('tokenChart').getContext('2d');
+    const data = {
+      labels: [
+        'Presale (22%)',
+        'Liquidity Pool (25%)',
+        'Marketing / Growth (18%)',
+        'Development (15%)',
+        'Team (13%)',
+        'Community Fund (8%)'
+      ],
+      datasets: [{
+        label: 'ZTH Token Distribution',
+        data: [22, 25, 18, 15, 13, 8],
+        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
+        borderWidth: 1
+      }]
+    };
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed.y + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 30,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    };
+    new Chart(ctx, config);
+
+    const legendContainer = document.getElementById("legend");
+    data.labels.forEach((label, i) => {
+      const div = document.createElement("div");
+      div.className = "legend-item";
+      div.innerHTML = <span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label};
+      legendContainer.appendChild(div);
+    });
+
+    // Background changer for #about
+    const about = document.getElementById("about");
+    const blocks = about.querySelectorAll(".story-block");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bg = entry.target.getAttribute("data-bg");
+          about.style.backgroundImage = url(${bg});
+        }
+      });
+    }, { threshold: 0.5 });
+
+    blocks.forEach(block => observer.observe(block));
+  </script>
+</body>
+</html>
