@@ -1,53 +1,83 @@
-<!-- TELJES HTML KÓD FRISSÍTETT TOKENOMICS ADATOKKAL -->
-
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zenthra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* ... (minden CSS változatlan maradt, amit küldtél) ... */
+    body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    section {
+      padding: 50px;
+      text-align: center;
+    }
+    canvas {
+      background: white;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .legend div {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legend .color-box {
+      width: 15px;
+      height: 15px;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
-  <!-- ... fejléc, hero szekció, about szekció, roadmap szekció változatlanul marad ... -->
+
+  <!-- Other sections remain unchanged -->
 
   <section id="tokenomics">
     <h2>Tokenomics</h2>
-    <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
-      <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
-    </p>
-    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
-    <div class="legend" id="legend"></div>
+    <canvas id="tokenomicsChart"></canvas>
+    <div id="tokenomicsLegend" class="legend"></div>
   </section>
 
-  <!-- ... How to Buy és footer szekció változatlanul marad ... -->
-
   <script>
-    // Countdown & socials toggle marad
-
-    const ctx = document.getElementById('tokenChart').getContext('2d');
+    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
     const data = {
       labels: [
-        'Presale (22%) - 33B',
-        'Liquidity (25%) - 37.5B',
-        'Marketing/Growth (19%) - 28.5B',
-        'Development (16%) - 24B',
-        'Team (locked) (10%) - 15B',
-        'Community Fund (8%) - 12B'
+        'Presale',
+        'Liquidity',
+        'Marketing/Growth',
+        'Development',
+        'Team (locked)',
+        'Community Fund'
       ],
       datasets: [{
-        label: 'ZTH Token Distribution',
-        data: [22, 25, 19, 16, 10, 8],
-        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
-        borderWidth: 1
+        label: 'Token Distribution',
+        data: [33000000000, 37500000000, 28500000000, 24000000000, 15000000000, 12000000000],
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF',
+          '#FF9F40'
+        ]
       }]
     };
+
     const config = {
-      type: 'bar',
+      type: 'doughnut',
       data: data,
       options: {
         responsive: true,
@@ -56,47 +86,25 @@
           tooltip: {
             callbacks: {
               label: function(context) {
-                return context.label + ': ' + context.parsed.y + '%';
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 30,
-            ticks: {
-              callback: function(value) {
-                return value + '%';
+                const value = context.raw.toLocaleString();
+                return `${context.label}: ${value}`;
               }
             }
           }
         }
       }
     };
-    new Chart(ctx, config);
 
-    const legendContainer = document.getElementById("legend");
+    const tokenomicsChart = new Chart(ctx, config);
+
+    // Generate legend manually
+    const legendContainer = document.getElementById('tokenomicsLegend');
     data.labels.forEach((label, i) => {
-      const div = document.createElement("div");
-      div.className = "legend-item";
+      const div = document.createElement('div');
       div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
       legendContainer.appendChild(div);
     });
-
-    // Background changer for 'Behind the Mask'
-    const about = document.getElementById("about");
-    const blocks = about.querySelectorAll(".story-block");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const bg = entry.target.getAttribute("data-bg");
-          about.querySelector("::before");
-        }
-      });
-    }, { threshold: 0.5 });
-
-    blocks.forEach(block => observer.observe(block));
   </script>
+
 </body>
 </html>
