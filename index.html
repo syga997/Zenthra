@@ -1,317 +1,263 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zenthra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZENTHRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html {
-      font-family: 'Orbitron', sans-serif;
-      background: url('Zenthra.jpeg') no-repeat center center/cover;
-      color: #dcd6f7;
-      scroll-behavior: smooth;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
     header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(15, 15, 30, 0.9);
+      background-color: #111;
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      z-index: 10;
     }
-    header h1 {
-      color: #a56eff;
-      font-size: 2rem;
-      text-shadow: 0 0 10px #a56effaa;
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
     }
+
     nav {
       display: flex;
-      gap: 20px;
+      gap: 1rem;
     }
+
     nav a {
+      color: #fff;
       text-decoration: none;
-      color: #dcd6f7;
-      font-weight: bold;
-      transition: color 0.3s ease;
+      transition: 0.3s;
     }
+
     nav a:hover {
-      color: #a56eff;
+      text-shadow: 0 0 5px #0ff;
     }
+
     .menu-toggle {
       display: none;
       flex-direction: column;
       cursor: pointer;
     }
+
     .menu-toggle span {
       height: 3px;
       width: 25px;
-      background: #dcd6f7;
+      background: white;
       margin: 4px 0;
-      border-radius: 2px;
     }
+
+    .countdown-container {
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #111;
+      max-width: 500px;
+      text-align: center;
+      border: 2px solid #0ff;
+      border-radius: 12px;
+    }
+
+    .countdown {
+      font-size: 2rem;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      background: #0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .community {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .dropdown-icons {
+      display: none;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .dropdown-icons a {
+      font-size: 1.5rem;
+      color: #0ff;
+    }
+
+    section {
+      padding: 4rem 1rem;
+    }
+
+    canvas {
+      max-width: 100%;
+      background: #fff;
+      border-radius: 12px;
+    }
+
     @media (max-width: 768px) {
-      .menu-toggle {
-        display: flex;
-      }
       nav {
         display: none;
         flex-direction: column;
-        width: 100%;
-        background: rgba(15, 15, 30, 0.95);
+        background-color: #111;
         position: absolute;
-        top: 70px;
-        left: 0;
-        padding: 20px;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 1rem;
       }
-      nav.active {
+
+      nav.open {
+        display: flex;
+      }
+
+      .menu-toggle {
         display: flex;
       }
     }
-    section {
-      padding: 140px 20px 80px;
-      max-width: 960px;
-      margin: auto;
-    }
-    #hero {
-      text-align: center;
-    }
-    #countdown {
-      font-size: 5rem;
-      color: #c4a7e7;
-      text-shadow: 0 0 20px #c4a7e7cc;
-      margin-bottom: 20px;
-    }
-    #countdown-text {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-    }
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    button {
-      background: #a56eff;
-      color: #000;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 4px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #a56effaa;
-    }
-    button:hover {
-      background: #c4a7e7;
-    }
-    .icon-button {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
-    .icon-button img {
-      width: 28px;
-      height: 28px;
-    }
-    h2 {
-      color: #a56eff;
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
-    .story-block {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      box-shadow: 0 0 15px #6e4ebbaa;
-    }
-    #tokenomics canvas {
-      background: rgba(20,20,35,0.8);
-      padding: 10px;
-      border-radius: 8px;
-    }
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      background: #2a2736;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-weight: bold;
-      box-shadow: 0 0 10px #1a1a2eaa;
-    }
-    .color-box {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
-      border-radius: 3px;
-    }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>Zenthra</h1>
+    <div class="logo">ZENTHRA</div>
     <div class="menu-toggle" onclick="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </div>
-    <nav id="main-nav">
-      <a href="#about">Behind the Mask</a>
+    <nav id="nav">
+      <a href="#story">Behind the Mask</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
-      <a href="#howto">How to Buy</a>
-      <a href="#">White Paper</a>
-      <a href="#">Audit</a>
+      <a href="#howtobuy">How to Buy</a>
+      <a href="#whitepaper">White Paper</a>
+      <a href="#audit">Audit</a>
     </nav>
   </header>
 
-  <section id="hero">
-    <div id="countdown">00:00:00</div>
-    <div id="countdown-text">Presale opens when the countdown hits zero</div>
-    <div class="buttons">
-      <button disabled>Connect Wallet</button>
-      <button disabled>Buy Now</button>
-      <button onclick="toggleCommunityLinks()">Join Our Community</button>
-      <div id="community-links" style="display:none; gap: 10px;">
-        <button class="icon-button"><img src="telegram-icon.png" alt="Telegram"></button>
-        <button class="icon-button"><img src="twitter-icon.png" alt="Twitter"></button>
+  <div class="countdown-container">
+    <h2>Presale opens with the Kandahit Zero</h2>
+    <div class="countdown" id="countdown"></div>
+    <div class="btn-group">
+      <button class="btn">Connect Wallet</button>
+      <button class="btn">Buy Now</button>
+    </div>
+    <div class="community">
+      <button class="btn" onclick="toggleIcons()">Join Our Community</button>
+      <div class="dropdown-icons" id="icons">
+        <a href="#" aria-label="Telegram">📨</a>
+        <a href="#" aria-label="Twitter">🐦</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="about">
-    <h2>The Zenthra Saga</h2>
-    <div class="story-block">
-      No one knew where Zenthra came from... irreversible liberation.
-    </div>
-    <div class="story-block">
-      Zenthra’s steps didn’t fade... ignite all that dares to restrain.
-    </div>
-    <div class="story-block">
-      Every $ZTH token holds a spark... promises to those who listen.
-    </div>
+  <section id="story">
+    <h2>Behind the Mask</h2>
+    <p>Section 1: Zenthra was not born in shadows — he was forged by them...</p>
+    <p>Section 2: The chains he wears are not restraints — they're reminders...</p>
+    <p>Section 3: When he steps forward, the world won't be ready — but he will.</p>
   </section>
 
   <section id="roadmap">
     <h2>Roadmap</h2>
-    <div class="story-block">Q2 2025: Presale & community building</div>
-    <div class="story-block">Q3 2025: Launch on DEX, staking program</div>
-    <div class="story-block">Q4 2025: Governance tools, CEX listings</div>
+    <p>Coming soon...</p>
   </section>
 
   <section id="tokenomics">
     <h2>Tokenomics</h2>
-    <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
-      <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
-    </p>
-    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
-    <div class="legend" id="legend"></div>
+    <canvas id="tokenChart"></canvas>
   </section>
 
-  <section id="howto">
+  <section id="howtobuy">
     <h2>How to Buy</h2>
-    <div class="story-block">1. Connect your wallet (MetaMask recommended)</div>
-    <div class="story-block">2. Send ETH to the contract address</div>
-    <div class="story-block">3. Receive $ZTH tokens instantly</div>
+    <p>Instructions go here...</p>
+  </section>
+
+  <section id="whitepaper">
+    <h2>White Paper</h2>
+    <p>Downloadable or embedded content goes here.</p>
+  </section>
+
+  <section id="audit">
+    <h2>Audit</h2>
+    <p>Security audit details go here.</p>
   </section>
 
   <script>
     function toggleMenu() {
-      const nav = document.getElementById("main-nav");
-      nav.classList.toggle("active");
+      document.getElementById('nav').classList.toggle('open');
     }
 
-    function toggleCommunityLinks() {
-      const links = document.getElementById("community-links");
-      links.style.display = links.style.display === "none" ? "flex" : "none";
+    function toggleIcons() {
+      const icons = document.getElementById('icons');
+      icons.style.display = icons.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    const countdown = document.getElementById("countdown");
-    const targetDate = new Date("2025-07-01T00:00:00").getTime();
-    setInterval(() => {
+    function updateCountdown() {
+      const endDate = new Date("2025-07-01T00:00:00Z").getTime();
       const now = new Date().getTime();
-      const distance = targetDate - now;
-      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
-    }, 1000);
+      const distance = endDate - now;
 
-    const ctx = document.getElementById('tokenChart').getContext('2d');
-    const data = {
-      labels: [
-        'Presale (22%)',
-        'Liquidity (23%)',
-        'Marketing/Growth (18%)',
-        'Team (12%)',
-        'Project Development (20%)',
-        'Reserve (5%)'
-      ],
-      datasets: [{
-        label: 'ZTH Token Distribution',
-        data: [22, 23, 18, 12, 20, 5],
-        backgroundColor: [
-          '#a56eff',
-          '#c4a7e7',
-          '#7a4bff',
-          '#503377',
-          '#b479ff',
-          '#d7bfff'
-        ],
-        borderWidth: 1
-      }]
-    };
-    const config = {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `<div>${days}d</div><div>${hours}h</div><div>${minutes}m</div><div>${seconds}s</div>`;
+    }
+
+    setInterval(updateCountdown, 1000);
+
+    const ctx = document.getElementById('tokenChart');
+    new Chart(ctx, {
       type: 'bar',
-      data: data,
+      data: {
+        labels: ['Presale', 'Liquidity', 'Marketing/Growth', 'Team', 'Project Development', 'Reserve'],
+        datasets: [{
+          label: 'Token Distribution',
+          data: [22, 23, 18, 12, 20, 5],
+          backgroundColor: ['#0ff', '#0cc', '#09c', '#06c', '#03c', '#00c']
+        }]
+      },
       options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.label + ': ' + context.parsed.y + '%';
-              }
-            }
-          }
-        },
         scales: {
-          y: {
-            beginAtZero: true,
-            max: 30,
-            ticks: {
-              callback: function(value) {
-                return value + '%';
-              }
-            }
-          }
+          y: { beginAtZero: true }
         }
       }
-    };
-    const tokenChart = new Chart(ctx, config);
-    const legendContainer = document.getElementById("legend");
-    data.labels.forEach((label, i) => {
-      const div = document.createElement("div");
-      div.className = "legend-item";
-      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
-      legendContainer.appendChild(div);
     });
   </script>
 </body>
+
 </html>
