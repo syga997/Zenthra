@@ -4,24 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zenthra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body, html {
+    body,
+    html {
       font-family: 'Orbitron', sans-serif;
       background: url('Zenthra.jpeg') no-repeat center center/cover;
       color: #dcd6f7;
       scroll-behavior: smooth;
-      min-height: 100vh;
     }
-
-    /* Header */
     header {
       position: fixed;
       top: 0;
@@ -30,134 +28,94 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 30px;
-      z-index: 9999;
+      padding: 20px 40px;
+      z-index: 10;
       flex-wrap: wrap;
     }
-
     header h1 {
       color: #a56eff;
       font-size: 2rem;
       text-shadow: 0 0 10px #a56effaa;
-      user-select: none;
+      flex-shrink: 0;
     }
-
-    /* Menüsáv */
-    nav#navbar {
+    nav {
       display: flex;
-      gap: 25px;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      justify-content: center;
     }
-    nav#navbar a {
+    nav a {
       text-decoration: none;
       color: #dcd6f7;
-      font-weight: 700;
+      font-weight: bold;
+      transition: color 0.3s ease;
       font-size: 1rem;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: background 0.3s, color 0.3s;
-      user-select: none;
-    }
-    nav#navbar a:hover,
-    nav#navbar a:focus {
-      background: #a56eff;
-      color: #000;
-      outline: none;
-      box-shadow: 0 0 10px #a56effcc;
-    }
-
-    /* Gyorsgombok a header jobb oldalán */
-    .header-buttons {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      margin-left: 20px;
-    }
-
-    .header-buttons a,
-    .header-buttons button {
-      background: #a56eff;
-      color: #000;
-      font-weight: 700;
-      font-size: 0.9rem;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 14px;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 0 10px #a56effaa;
-      user-select: none;
-      transition: background 0.3s ease;
       white-space: nowrap;
     }
-    .header-buttons a:hover,
-    .header-buttons button:hover {
+    nav a:hover {
+      color: #a56eff;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .header-right button {
+      background: #a56eff;
+      color: #000;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #a56effaa;
+      transition: background-color 0.3s ease;
+    }
+    .header-right button:hover {
       background: #c4a7e7;
     }
-    /* Elválasztó vonal a gyorsgombok csoportjai között */
-    .header-buttons .separator {
-      width: 1px;
-      height: 28px;
-      background: #7a4bff;
-      margin: 0 10px;
-    }
-
-    /* Hamburger ikon */
-    .menu-toggle {
-      display: none;
-      font-size: 2.3rem;
-      color: #a56eff;
+    .icon-link {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      user-select: none;
+      color: #dcd6f7;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    .icon-link:hover {
+      color: #a56eff;
+    }
+    /* Telegram icon SVG */
+    .icon-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
 
-    /* Sections általános */
     section {
       padding: 140px 20px 80px;
       max-width: 960px;
-      margin: 0 auto 60px;
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 12px;
-      box-shadow: 0 0 30px #6e4ebbaa;
+      margin: auto;
     }
-
-    h2 {
-      color: #a56eff;
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2.2rem;
-      user-select: none;
-    }
-
-    .story-block {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 20px 25px;
-      margin-bottom: 25px;
-      border-radius: 8px;
-      box-shadow: 0 0 15px #6e4ebbaa;
-      line-height: 1.5;
-      font-size: 1.1rem;
-      user-select: text;
-      white-space: pre-line;
-    }
-
-    /* Hero szekció */
     #hero {
       text-align: center;
-      padding-top: 160px;
-      margin-bottom: 50px;
     }
     #countdown {
       font-size: 5rem;
       color: #c4a7e7;
       text-shadow: 0 0 20px #c4a7e7cc;
       margin-bottom: 20px;
-      user-select: none;
     }
     #countdown-text {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-bottom: 40px;
-      font-weight: 600;
-      user-select: none;
     }
     .buttons {
       display: flex;
@@ -169,125 +127,114 @@
       background: #a56eff;
       color: #000;
       border: none;
-      padding: 14px 28px;
+      padding: 12px 24px;
       font-size: 1rem;
-      font-weight: 700;
-      border-radius: 6px;
+      font-weight: bold;
+      border-radius: 4px;
       cursor: pointer;
-      box-shadow: 0 0 15px #a56effaa;
-      transition: background 0.3s ease;
-      user-select: none;
+      box-shadow: 0 0 10px #a56effaa;
+      transition: background-color 0.3s ease;
     }
-    button:hover:not(:disabled) {
+    button:hover {
       background: #c4a7e7;
     }
-    button:disabled {
-      background: #4a3e6f;
-      cursor: not-allowed;
-      box-shadow: none;
+    h2 {
+      color: #a56eff;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
     }
-
-    /* Tokenomics szekció */
+    .story-block {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 15px #6e4ebbaa;
+      white-space: pre-line;
+    }
     #tokenomics canvas {
-      background: rgba(20,20,35,0.9);
-      padding: 25px;
-      border-radius: 12px;
-      max-width: 100%;
+      background: rgba(20, 20, 35, 0.8);
+      padding: 10px;
+      border-radius: 8px;
     }
     .legend {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 18px;
-      margin-top: 25px;
+      gap: 15px;
+      margin-top: 20px;
     }
     .legend-item {
       display: flex;
       align-items: center;
       background: #2a2736;
-      padding: 10px 18px;
-      border-radius: 6px;
-      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
       box-shadow: 0 0 10px #1a1a2eaa;
-      user-select: none;
-      font-size: 0.95rem;
+      white-space: nowrap;
     }
     .color-box {
-      width: 22px;
-      height: 22px;
-      margin-right: 12px;
-      border-radius: 4px;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border-radius: 3px;
     }
-
-    /* Responsive - Mobil */
+    /* Placeholder FAQ section */
+    #faq {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 6px;
+      margin-top: 40px;
+      font-size: 1.1rem;
+      text-align: center;
+      box-shadow: 0 0 15px #6e4ebbaa;
+    }
     @media (max-width: 768px) {
       header {
-        padding: 12px 20px;
-        justify-content: space-between;
-      }
-      .menu-toggle {
-        display: block;
-      }
-      nav#navbar {
         flex-direction: column;
-        width: 100%;
-        background: rgba(15, 15, 30, 0.95);
-        margin-top: 10px;
-        display: none;
+        align-items: center;
       }
-      nav#navbar.active {
-        display: flex;
-      }
-      nav#navbar a {
-        margin: 12px 0;
-        font-size: 1.2rem;
-        padding: 14px 20px;
-      }
-      .header-buttons {
-        margin-left: 0;
-        gap: 12px;
-        flex-wrap: wrap;
+      nav {
+        margin: 10px 0;
         justify-content: center;
-        width: 100%;
-        margin-top: 10px;
-      }
-      .header-buttons .separator {
-        display: none;
-      }
-      section {
-        padding: 130px 15px 60px;
-        margin-bottom: 40px;
+        gap: 12px;
       }
       #countdown {
-        font-size: 3.8rem;
+        font-size: 3rem;
       }
       .buttons {
         flex-direction: column;
-        gap: 16px;
+        align-items: center;
       }
-      button {
-        width: 100%;
-        max-width: 320px;
+      .header-right {
+        margin-top: 10px;
       }
     }
-
   </style>
 </head>
 <body>
   <div class="animated-smoke-background"></div>
-
   <header>
     <h1>Zenthra</h1>
-    <div class="menu-toggle" id="menu-toggle" aria-label="Menü megnyitása" role="button" tabindex="0">&#9776;</div>
-
-    <nav id="navbar" role="navigation" aria-label="Fő navigáció">
+    <nav>
       <a href="#about">About</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#howto">How to Buy</a>
       <a href="#faq">FAQ</a>
     </nav>
-
-    <div class="header-buttons" role="region" aria-label="Gyorsgombok">
-      <!-- Közösségi gombok -->
-      <a href="https://t.me/yourtelegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</
+    <div class="header-right">
+      <button>Whitepaper</button>
+      <button>Audit</button>
+      <a href="#" class="icon-link" aria-label="Telegram" title="Telegram">
+        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+          <circle fill="#37aee2" cx="120" cy="120" r="120"/>
+          <path fill="#c8daea" d="M88 164c-3 0-4-1-4-4l2-34 56-26-63 54z"/>
+          <path fill="#a9c9dd" d="M162 99l-62 53 20-27-12-12 22-22 33-20z"/>
+          <path fill="#fff" d="M88 164l55-54 25-14-80 65-2 3z"/>
+        </svg>
+      </a>
+      <a href="#" class="icon-link" aria-label="Twitter" title="Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 
