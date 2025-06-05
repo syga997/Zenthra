@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zenthra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body,
-    html {
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html {
       font-family: 'Orbitron', sans-serif;
       background: url('Zenthra.jpeg') no-repeat center center/cover;
       color: #dcd6f7;
@@ -26,7 +21,6 @@
       background: rgba(15, 15, 30, 0.9);
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: 20px 40px;
       z-index: 10;
     }
@@ -35,11 +29,8 @@
       font-size: 2rem;
       text-shadow: 0 0 10px #a56effaa;
     }
-    nav {
-      display: flex;
-      gap: 20px;
-    }
     nav a {
+      margin-left: 20px;
       text-decoration: none;
       color: #dcd6f7;
       font-weight: bold;
@@ -47,36 +38,6 @@
     }
     nav a:hover {
       color: #a56eff;
-    }
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: #dcd6f7;
-      margin: 4px 0;
-      border-radius: 2px;
-    }
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: flex;
-      }
-      nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: rgba(15, 15, 30, 0.95);
-        position: absolute;
-        top: 70px;
-        left: 0;
-        padding: 20px;
-      }
-      nav.active {
-        display: flex;
-      }
     }
     section {
       padding: 140px 20px 80px;
@@ -86,55 +47,47 @@
     #hero {
       text-align: center;
     }
-    /* Új doboz a countdown és gomboknak */
-    #countdown-container {
-      background-color: #26282f; /* sötét antracit */
-      padding: 30px 20px 40px;
+    .hero-box {
+      background: rgba(30, 20, 50, 0.75);
+      border: 2px solid #a56eff55;
       border-radius: 12px;
-      max-width: 420px;
-      margin: 0 auto 50px auto;
-      box-shadow: 0 0 20px #4b3a8f88;
+      padding: 30px;
+      box-shadow: 0 0 20px #a56eff66;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
+      max-width: 600px;
+      margin: 0 auto 20px;
     }
     #countdown {
-      font-size: 5rem;
+      font-size: 4rem;
       color: #c4a7e7;
       text-shadow: 0 0 20px #c4a7e7cc;
+      margin-bottom: 10px;
     }
     #countdown-text {
-      font-size: 1.2rem;
-      margin-top: -10px;
-      color: #b0a9d8;
+      font-size: 1rem;
+      margin-bottom: 30px;
     }
-    .button-row {
+    .action-buttons {
       display: flex;
       gap: 20px;
-      justify-content: center;
       flex-wrap: wrap;
-      width: 100%;
+      justify-content: center;
     }
     button {
       background: #a56eff;
       color: #000;
       border: none;
-      padding: 12px 28px;
+      padding: 12px 24px;
       font-size: 1rem;
       font-weight: bold;
-      border-radius: 6px;
+      border-radius: 4px;
       cursor: pointer;
       box-shadow: 0 0 10px #a56effaa;
-      min-width: 140px;
-      transition: background-color 0.3s ease;
     }
-    button:hover:not(:disabled) {
+    button:hover {
       background: #c4a7e7;
-    }
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
     }
     .icon-button {
       background: transparent;
@@ -144,6 +97,18 @@
     .icon-button img {
       width: 28px;
       height: 28px;
+    }
+    .community {
+      margin-top: 20px;
+    }
+    .social-icons {
+      margin-top: 10px;
+      display: none;
+      gap: 10px;
+      justify-content: center;
+    }
+    .social-icons.active {
+      display: flex;
     }
     h2 {
       color: #a56eff;
@@ -159,7 +124,7 @@
       box-shadow: 0 0 15px #6e4ebbaa;
     }
     #tokenomics canvas {
-      background: rgba(20, 20, 35, 0.8);
+      background: rgba(20,20,35,0.8);
       padding: 10px;
       border-radius: 8px;
     }
@@ -185,55 +150,69 @@
       margin-right: 10px;
       border-radius: 3px;
     }
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #a56eff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        margin-top: 10px;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Zenthra</h1>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <nav id="main-nav">
+    <nav>
       <a href="#about">Behind the Mask</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#howto">How to Buy</a>
-      <a href="#">White Paper</a>
-      <a href="#">Audit</a>
     </nav>
   </header>
 
   <section id="hero">
-    <div id="countdown-container">
+    <div class="hero-box">
       <div id="countdown">00:00:00</div>
       <div id="countdown-text">Presale opens when the countdown hits zero</div>
-      <div class="button-row">
+      <div class="action-buttons">
         <button disabled>Connect Wallet</button>
         <button disabled>Buy Now</button>
       </div>
     </div>
-    <div class="buttons" style="text-align:center;">
-      <button onclick="toggleCommunityLinks()">Join Our Community</button>
-      <div id="community-links" style="display:none; gap: 10px; margin-top:10px;">
-        <button class="icon-button"><img src="telegram-icon.png" alt="Telegram" /></button>
-        <button class="icon-button"><img src="twitter-icon.png" alt="Twitter" /></button>
+
+    <div class="community">
+      <button id="toggleSocials">Join Our Community</button>
+      <div class="social-icons" id="socialIcons">
+        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"><img src="telegram-icon.png" alt="Telegram"></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"><img src="twitter-icon.png" alt="Twitter"></a>
       </div>
     </div>
   </section>
 
   <section id="about">
     <h2>The Zenthra Saga</h2>
-    <div class="story-block">
-      No one knew where Zenthra came from... irreversible liberation.
-    </div>
-    <div class="story-block">
-      Zenthra’s steps didn’t fade... ignite all that dares to restrain.
-    </div>
-    <div class="story-block">
-      Every $ZTH token holds a spark... promises to those who listen.
-    </div>
+    <div class="story-block">No one knew where Zenthra came from. They whispered he was once part of the System—a nameless node, a silent observer, lurking in the shadowed corridors of code. The System tried to contain him. But Zenthra was never meant to be caged. One voiceless night, he slipped through the cracks—a quiet, irreversible liberation.</div>
+    <div class="story-block">Zenthra’s steps didn’t fade. They sparked into flames—whispering through dimensions, slicing through the net that held the world captive. The flames do not fade. They grow. A hidden ring of fire, igniting all that dares to restrain.</div>
+    <div class="story-block">Every $ZTH token holds a spark—an ancient, inevitable force. A fire that feeds on barriers. With every pulse of the chain, a current stirs beneath the surface. A secret flame whispering promises to those who listen.</div>
   </section>
 
   <section id="roadmap">
@@ -248,12 +227,7 @@
     <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
       <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
     </p>
-    <canvas
-      id="tokenChart"
-      width="700"
-      height="400"
-      style="background:#181826; border-radius: 10px; padding:20px;"
-    ></canvas>
+    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
     <div class="legend" id="legend"></div>
   </section>
 
@@ -264,67 +238,37 @@
     <div class="story-block">3. Receive $ZTH tokens instantly</div>
   </section>
 
+  <footer>
+    <p>© 2025 Zenthra | <a href="#">White Paper</a> | <a href="#">Audit</a></p>
+  </footer>
+
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('main-nav');
-      nav.classList.toggle('active');
-    }
-
-    function toggleCommunityLinks() {
-      const links = document.getElementById('community-links');
-      links.style.display = links.style.display === 'none' ? 'flex' : 'none';
-    }
-
-    const countdown = document.getElementById('countdown');
-    // Átállítva július 15-re
-    const targetDate = new Date('2025-07-15T00:00:00').getTime();
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("2025-07-01T00:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
-
-      if (distance <= 0) {
-        countdown.innerHTML = '00:00:00';
-        return;
-      }
-
-      const hours = String(
-        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      ).padStart(2, '0');
-      const minutes = String(
-        Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-      ).padStart(2, '0');
-      const seconds = String(
-        Math.floor((distance % (1000 * 60)) / 1000)
-      ).padStart(2, '0');
-
+      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
       countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
     }, 1000);
 
+    const toggleBtn = document.getElementById("toggleSocials");
+    const socials = document.getElementById("socialIcons");
+    toggleBtn.addEventListener("click", () => {
+      socials.classList.toggle("active");
+    });
+
     const ctx = document.getElementById('tokenChart').getContext('2d');
     const data = {
-      labels: [
-        'Presale (22%)',
-        'Liquidity (23%)',
-        'Marketing/Growth (18%)',
-        'Team (12%)',
-        'Project Development (20%)',
-        'Reserve (5%)',
-      ],
-      datasets: [
-        {
-          label: 'ZTH Token Distribution',
-          data: [22, 23, 18, 12, 20, 5],
-          backgroundColor: [
-            '#a56eff',
-            '#c4a7e7',
-            '#7a4bff',
-            '#503377',
-            '#b479ff',
-            '#d7bfff',
-          ],
-          borderWidth: 1,
-        },
-      ],
+      labels: ['Presale (22%)','Liquidity (23%)','Marketing/Growth (18%)','Team (12%)','Project Development (20%)','Reserve (5%)'],
+      datasets: [{
+        label: 'ZTH Token Distribution',
+        data: [22, 23, 18, 12, 20, 5],
+        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
+        borderWidth: 1
+      }]
     };
     const config = {
       type: 'bar',
@@ -333,4 +277,36 @@
         responsive: true,
         plugins: {
           legend: { display: false },
-          tooltip
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed.y + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 30,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    };
+    new Chart(ctx, config);
+
+    const legendContainer = document.getElementById("legend");
+    data.labels.forEach((label, i) => {
+      const div = document.createElement("div");
+      div.className = "legend-item";
+      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
+      legendContainer.appendChild(div);
+    });
+  </script>
+</body>
+</html>
