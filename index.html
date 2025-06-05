@@ -254,63 +254,88 @@
     countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
   }, 1000);
 
-  // Tokenomics Chart
-  const ctx = document.getElementById('tokenChart').getContext('2d');
-  const data = {
-    labels: [
-      'Presale (22%)',
-      'Liquidity (23%)',
-      'Marketing/Growth (18%)',
-      'Team (12%)',
-      'Project Development (20%)',
-      'Reserve (5%)'
-    ],
-    datasets: [{
-      label: 'ZTH Token Distribution',
-      data: [22, 23, 18, 12, 20, 5],
-      backgroundColor: [
-        '#a56eff',
-        '#c4a7e7',
-        '#7a4bff',
-        '#503377',
-        '#b479ff',
-        '#d7bfff'
-      ],
-      borderWidth: 1
-    }]
-  };
+  <!-- Tokenomics Section -->
+<section id="tokenomics" style="padding: 60px 20px; background-color: #0a0a0a; color: #fff;">
+  <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+    <h2 style="font-size: 2.5em; margin-bottom: 20px;">Tokenomics</h2>
+    <p style="font-size: 1.1em; color: #ccc;">Total Supply: <strong>150,000,000,000</strong> ZENTHRA</p>
+    <canvas id="tokenChart" style="max-width: 600px; margin: 40px auto;"></canvas>
 
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              return context.label + ': ' + context.parsed.y + '%';
-            }
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 30,
-          ticks: {
-            callback: function(value) {
-              return value + '%';
-            }
-          }
-        }
+    <!-- Breakdown -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px;">
+
+      <div style="flex: 1 1 250px; background: #111; padding: 20px; border-radius: 10px;">
+        <h3 style="color: #00ffc8;">Presale – 22%</h3>
+        <p style="color: #ccc;">Az induló erő: a kezdeti tőke bevonása, ami megalapozza a projektet. Korrekt ár, magas potenciál.</p>
+      </div>
+
+      <div style="flex: 1 1 250px; background: #111; padding: 20px; border-radius: 10px;">
+        <h3 style="color: #ff6b6b;">Liquidity – 25%</h3>
+        <p style="color: #ccc;">Erős alap a tőzsdéken: garantált likviditás és stabil kereskedés, rugalmasság a piacon.</p>
+      </div>
+
+      <div style="flex: 1 1 250px; background: #111; padding: 20px; border-radius: 10px;">
+        <h3 style="color: #ffd166;">Marketing & Growth – 18%</h3>
+        <p style="color: #ccc;">Hírverés, terjeszkedés, figyelem: a Zenthra hangja eljut minden fülbe és minden feedbe.</p>
+      </div>
+
+      <div style="flex: 1 1 250px; background: #111; padding: 20px; border-radius: 10px;">
+        <h3 style="color: #6a9eff;">Development – 15%</h3>
+        <p style="color: #ccc;">A Zenthra univerzum építése. Technológia, fejlesztés, platformok, új funkciók – egyre mélyebb világ.</p>
+      </div>
+
+      <div style="flex: 1 1 250px; background: #111; padding: 20px; border-radius: 10px;">
+        <h3 style="color: #a366ff;">Team – 13% (locked)</h3>
+        <p style="color: #ccc;">Elkötelezett háttércsapat, zárolt tokenekkel – hosszú távra tervezve, a siker mellé állva.</p>
+      </div>
+
+      <div style="flex: 1 1 250px; background: #111; padding: 20px; border-radius: 10px;">
+        <h3 style="color: #00d1ff;">Community Fund – 8%</h3>
+        <p style="color: #ccc;">Közösségépítés, nyeremények, DAO-szavazások. A Zenthra szíve: a közösség maga.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('tokenChart').getContext('2d');
+const tokenChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Presale (22%)', 'Liquidity (25%)', 'Marketing (18%)', 'Development (15%)', 'Team (13%)', 'Community (8%)'],
+    datasets: [{
+      data: [22, 25, 18, 15, 13, 8],
+      backgroundColor: [
+        '#00ffc8',
+        '#ff6b6b',
+        '#ffd166',
+        '#6a9eff',
+        '#a366ff',
+        '#00d1ff'
+      ],
+      borderColor: '#111',
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '60%',
+    plugins: {
+      legend: {
+        labels: {
+          color: '#fff',
+          font: { size: 14 }
+        },
+        position: 'bottom'
       }
     }
-  };
-
-  const tokenChart = new Chart(ctx, config);
-
+  }
+});
+</script>
+  
   // Generate Legend
   const legendContainer = document.getElementById("legend");
   data.labels.forEach((label, i) => {
