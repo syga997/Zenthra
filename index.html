@@ -1,5 +1,4 @@
-<!-- A TELJES HTML KÓD A FRISSÍTETT TOKENOMICS ADATOKKAL -->
-
+<!-- A TELJES HTML HAMBURGERMENÜVEL (Tokenomics biztonságban) -->
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -23,6 +22,7 @@
       background: rgba(15, 15, 30, 0.9);
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 20px 40px;
       z-index: 10;
     }
@@ -30,6 +30,10 @@
       color: #a56eff;
       font-size: 2rem;
       text-shadow: 0 0 10px #a56effaa;
+    }
+    nav {
+      display: flex;
+      align-items: center;
     }
     nav a {
       margin-left: 20px;
@@ -40,6 +44,31 @@
     }
     nav a:hover {
       color: #a56eff;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #dcd6f7;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(15, 15, 30, 0.95);
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .mobile-menu a {
+      margin: 10px 0;
     }
     section {
       padding: 140px 20px 80px;
@@ -128,7 +157,6 @@
       position: relative;
       z-index: 1;
     }
-
     #about::before {
       content: '';
       position: absolute;
@@ -139,7 +167,6 @@
       opacity: 0.2;
       transition: background-image 1s ease;
     }
-
     #tokenomics canvas {
       background: rgba(20,20,35,0.8);
       padding: 10px;
@@ -181,16 +208,16 @@
     footer a:hover {
       text-decoration: underline;
     }
+
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-      }
       nav {
-        margin-top: 10px;
+        display: none;
       }
-      .action-buttons {
-        flex-direction: column;
+      .menu-toggle {
+        display: flex;
+      }
+      .mobile-menu {
+        display: flex;
       }
     }
   </style>
@@ -198,12 +225,21 @@
 <body>
   <header>
     <h1>Zenthra</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
     <nav>
       <a href="#about">Behind the Mask</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#howto">How to Buy</a>
     </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about">Behind the Mask</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#howto">How to Buy</a>
+    </div>
   </header>
 
   <section id="hero">
@@ -244,7 +280,7 @@
     <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
       <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
     </p>
-    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
+    <canvas id="tokenChart" width="700" height="400"></canvas>
     <div class="legend" id="legend"></div>
   </section>
 
@@ -260,6 +296,10 @@
   </footer>
 
   <script>
+    function toggleMenu() {
+      document.getElementById("mobileMenu").classList.toggle("active");
+    }
+
     const countdown = document.getElementById("countdown");
     const targetDate = new Date("2025-07-01T00:00:00").getTime();
     setInterval(() => {
@@ -283,11 +323,11 @@
         'Marketing / Growth (18%)',
         'Development (15%)',
         'Team (13%)',
-        'Community Fund (7%)'
+        'Community Fund (8%)'
       ],
       datasets: [{
         label: 'ZTH Token Distribution',
-        data: [22, 25, 18, 15, 13, 7],
+        data: [22, 25, 18, 15, 13, 8],
         backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
         borderWidth: 1
       }]
