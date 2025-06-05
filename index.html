@@ -91,11 +91,33 @@
       font-size: 1.2rem;
       margin-bottom: 40px;
     }
+    /* Új téglalap konténer a számláló + gomboknak */
+    .countdown-button-container {
+      background: rgba(15, 15, 30, 0.8);
+      padding: 20px 30px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 0 20px #a56effaa;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 100%;
+      margin: 0 auto 25px auto;
+    }
+    /* Számláló és a szöveg egy oszlopban */
+    .countdown-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 180px;
+      user-select: none;
+    }
     .buttons {
       display: flex;
-      justify-content: center;
       gap: 20px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      user-select: none;
     }
     button {
       background: #a56eff;
@@ -104,21 +126,32 @@
       padding: 12px 24px;
       font-size: 1rem;
       font-weight: bold;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
       box-shadow: 0 0 10px #a56effaa;
+      min-width: 110px;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
     }
-    button:hover {
+    button:disabled {
+      background: #4e3a75;
+      color: #888;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    button:hover:not(:disabled) {
       background: #c4a7e7;
     }
     .icon-button {
       background: transparent;
       border: none;
       cursor: pointer;
+      padding: 0;
     }
     .icon-button img {
       width: 28px;
       height: 28px;
+      filter: drop-shadow(0 0 2px #a56eff);
     }
     h2 {
       color: #a56eff;
@@ -132,6 +165,7 @@
       margin-bottom: 20px;
       border-radius: 6px;
       box-shadow: 0 0 15px #6e4ebbaa;
+      user-select: text;
     }
     #tokenomics canvas {
       background: rgba(20,20,35,0.8);
@@ -160,6 +194,46 @@
       margin-right: 10px;
       border-radius: 3px;
     }
+    /* Join Our Community gomb alatti ikonok */
+    #community-links {
+      display: none;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 15px;
+      user-select: none;
+    }
+    /* Középre helyezés */
+    .community-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    /* Mobilra optimalizálás */
+    @media (max-width: 480px) {
+      #countdown {
+        font-size: 3.5rem;
+      }
+      .countdown-button-container {
+        flex-direction: column;
+        padding: 20px 15px;
+        gap: 15px;
+        max-width: 320px;
+      }
+      .buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      button {
+        min-width: 100%;
+        padding: 12px 0;
+      }
+      .countdown-wrapper {
+        min-width: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -181,15 +255,21 @@
   </header>
 
   <section id="hero">
-    <div id="countdown">00:00:00</div>
-    <div id="countdown-text">Presale opens when the countdown hits zero</div>
-    <div class="buttons">
-      <button disabled>Connect Wallet</button>
-      <button disabled>Buy Now</button>
-      <button onclick="toggleCommunityLinks()">Join Our Community</button>
-      <div id="community-links" style="display:none; gap: 10px;">
-        <button class="icon-button"><img src="telegram-icon.png" alt="Telegram"></button>
-        <button class="icon-button"><img src="twitter-icon.png" alt="Twitter"></button>
+    <div class="countdown-button-container" role="region" aria-label="Countdown and action buttons">
+      <div class="countdown-wrapper">
+        <div id="countdown" aria-live="polite" aria-atomic="true">00:00:00</div>
+        <div id="countdown-text">Presale opens when the countdown hits zero</div>
+      </div>
+      <div class="buttons" role="group" aria-label="Wallet and purchase actions">
+        <button disabled>Connect Wallet</button>
+        <button disabled>Buy Now</button>
+      </div>
+    </div>
+    <div class="community-wrapper">
+      <button onclick="toggleCommunityLinks()" aria-expanded="false" aria-controls="community-links">Join Our Community</button>
+      <div id="community-links" role="region" aria-label="Community social media links" >
+        <button class="icon-button" aria-label="Telegram"><img src="telegram-icon.png" alt="Telegram"></button>
+        <button class="icon-button" aria-label="Twitter"><img src="twitter-icon.png" alt="Twitter"></button>
       </div>
     </div>
   </section>
@@ -238,7 +318,14 @@
 
     function toggleCommunityLinks() {
       const links = document.getElementById("community-links");
-      links.style.display = links.style.display === "none" ? "flex" : "none";
+      const btn = event.currentTarget;
+      if (links.style.display === "flex") {
+        links.style.display = "none";
+        btn.setAttribute("aria-expanded", "false");
+      } else {
+        links.style.display = "flex";
+        btn.setAttribute("aria-expanded", "true");
+      }
     }
 
     const countdown = document.getElementById("countdown");
@@ -246,72 +333,8 @@
     setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
-      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
-    }, 1000);
-
-    const ctx = document.getElementById('tokenChart').getContext('2d');
-    const data = {
-      labels: [
-        'Presale (22%)',
-        'Liquidity (23%)',
-        'Marketing/Growth (18%)',
-        'Team (12%)',
-        'Project Development (20%)',
-        'Reserve (5%)'
-      ],
-      datasets: [{
-        label: 'ZTH Token Distribution',
-        data: [22, 23, 18, 12, 20, 5],
-        backgroundColor: [
-          '#a56eff',
-          '#c4a7e7',
-          '#7a4bff',
-          '#503377',
-          '#b479ff',
-          '#d7bfff'
-        ],
-        borderWidth: 1
-      }]
-    };
-    const config = {
-      type: 'bar',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.label + ': ' + context.parsed.y + '%';
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 30,
-            ticks: {
-              callback: function(value) {
-                return value + '%';
-              }
-            }
-          }
-        }
+      if(distance <= 0) {
+        countdown.innerHTML = "00:00:00";
+        return;
       }
-    };
-    const tokenChart = new Chart(ctx, config);
-    const legendContainer = document.getElementById("legend");
-    data.labels.forEach((label, i) => {
-      const div = document.createElement("div");
-      div.className = "legend-item";
-      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
-      legendContainer.appendChild(div);
-    });
-  </script>
-</body>
-</html>
+      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000
