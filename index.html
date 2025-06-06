@@ -75,6 +75,7 @@
       color: #c4a7e7;
       text-shadow: 0 0 20px #c4a7e7cc;
       margin-bottom: 10px;
+      font-variant-numeric: tabular-nums;
     }
     #countdown-text {
       font-size: 1rem;
@@ -229,7 +230,7 @@
     <div class="hero-box">
       <h2>Buy $ZTH</h2>
       <p style="font-size:1.5rem; font-weight:700; color:#a56eff; margin-bottom: 25px;">$ZTH price = $0.0007</p>
-      <div id="countdown">00:00:00</div>
+      <div id="countdown">00:10:00</div>
       <div id="countdown-text">Presale opens when the countdown hits zero</div>
       <div id="countdown-quote">“Every buy burns. Every burn lifts the price.”</div>
       <div class="action-buttons">
@@ -257,90 +258,3 @@
 
   <section id="roadmap">
     <h2>Roadmap</h2>
-    <div class="story-block">Q2 2025: Presale & community building</div>
-    <div class="story-block">Q3 2025: Launch on DEX, staking program</div>
-    <div class="story-block">Q4 2025: Governance tools, CEX listings</div>
-  </section>
-
-  <section id="tokenomics">
-    <h2>Tokenomics</h2>
-    <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
-      <strong>Total Supply:</strong> <span style="color: #a56eff;">300,000,000,000 $ZTH</span>
-    </p>
-    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
-    <div class="legend" id="legend"></div>
-  </section>
-
-  <section id="howto">
-    <h2>How to Buy</h2>
-    <div class="story-block">
-      Step 1: Connect your wallet by clicking the 'Connect Wallet' button.<br />
-      Step 2: Choose your preferred method - Buy Now or Buy with Card.<br />
-      Step 3: Follow the on-screen instructions to complete your purchase.<br />
-      Step 4: Hold tight and watch your $ZTH grow in your wallet.
-    </div>
-  </section>
-
-  <footer>
-    &copy; 2025 Zenthra. All rights reserved. | <a href="#hero">Back to top</a>
-  </footer>
-
-  <script>
-    // Menü toggle mobilon
-    const menuToggle = document.getElementById('menu-toggle');
-    const navbar = document.getElementById('navbar');
-    menuToggle.addEventListener('click', () => {
-      navbar.classList.toggle('active');
-    });
-
-    // Közösségi ikonok dropdown
-    const toggleSocialsBtn = document.getElementById('toggleSocials');
-    const socialIcons = document.getElementById('socialIcons');
-    toggleSocialsBtn.addEventListener('click', () => {
-      socialIcons.classList.toggle('active');
-    });
-
-    // Visszaszámláló egyszerű demo (pl. 10 perc)
-    const countdownEl = document.getElementById('countdown');
-    const countdownText = document.getElementById('countdown-text');
-    let countdownTime = 10 * 60; // 10 perc másodpercben
-
-    function updateCountdown() {
-      if (countdownTime <= 0) {
-        countdownEl.textContent = '00:00:00';
-        countdownText.textContent = 'Presale is now OPEN!';
-        clearInterval(countdownInterval);
-        return;
-      }
-      const hrs = Math.floor(countdownTime / 3600);
-      const mins = Math.floor((countdownTime % 3600) / 60);
-      const secs = countdownTime % 60;
-      countdownEl.textContent =
-        String(hrs).padStart(2, '0') +
-        ':' +
-        String(mins).padStart(2, '0') +
-        ':' +
-        String(secs).padStart(2, '0');
-      countdownTime--;
-    }
-    updateCountdown();
-    const countdownInterval = setInterval(updateCountdown, 1000);
-
-    // Tokenomics chart adatok
-    const ctx = document.getElementById('tokenChart').getContext('2d');
-    const data = {
-      labels: [
-        'Presale (22%)',
-        'Liquidity (23%)',
-        'Marketing/Growth (18%)',
-        'Team (12%)',
-        'Project Development (20%)',
-        'Reserve (5%)'
-      ],
-      datasets: [{
-        label: 'Token Allocation',
-        data: [22, 23, 18, 12, 20, 5],
-        backgroundColor: [
-          '#a56eff',
-          '#6b5bff',
-          '#b56ef
