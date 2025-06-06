@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zenthra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -78,14 +78,14 @@
     }
     #countdown-text {
       font-size: 1rem;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
     }
-    #usdtCounter {
-      font-size: 2rem;
+    #countdown-quote {
+      font-size: 1.2rem;
+      font-weight: 700;
       color: #a56eff;
-      text-shadow: 0 0 15px #a56effcc;
-      margin-bottom: 25px;
-      font-weight: 800;
+      margin-bottom: 30px;
+      text-shadow: 0 0 8px #a56effbb;
     }
     .action-buttons {
       display: flex;
@@ -103,16 +103,10 @@
       border-radius: 4px;
       cursor: pointer;
       box-shadow: 0 0 10px #a56effaa;
-      min-width: 140px;
       transition: background-color 0.3s ease;
     }
-    button:hover:not(:disabled) {
+    button:hover {
       background: #c4a7e7;
-    }
-    button:disabled {
-      background: #6e5da7;
-      cursor: not-allowed;
-      box-shadow: none;
     }
     .icon-button {
       background: transparent;
@@ -216,10 +210,6 @@
       .action-buttons {
         flex-direction: column;
       }
-      .action-buttons button {
-        width: 100%;
-        min-width: unset;
-      }
     }
   </style>
 </head>
@@ -237,21 +227,23 @@
 
   <section id="hero">
     <div class="hero-box">
+      <h2>Buy $ZTH</h2>
+      <p style="font-size:1.5rem; font-weight:700; color:#a56eff; margin-bottom: 25px;">$ZTH price = $0.0007</p>
       <div id="countdown">00:00:00</div>
       <div id="countdown-text">Presale opens when the countdown hits zero</div>
-      <div id="usdtCounter">$0 USDT raised</div>
+      <div id="countdown-quote">“Every buy burns. Every burn lifts the price.”</div>
       <div class="action-buttons">
-        <button disabled>Connect Wallet</button>
-        <button disabled>Buy Now</button>
-        <button disabled>Buy with Card</button>
+        <button id="connectWalletBtn">Connect Wallet</button>
+        <button id="buyNowBtn">Buy Now</button>
+        <button id="buyWithCardBtn">Buy with Card</button>
       </div>
     </div>
 
     <div class="community">
       <button id="toggleSocials">Join Our Community</button>
       <div class="social-icons" id="socialIcons">
-        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"><img src="telegram-icon.png" alt="Telegram"></a>
-        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"><img src="twitter-icon.png" alt="Twitter"></a>
+        <a href="https://t.me/yourchannel" target="_blank" class="icon-button" aria-label="Telegram"><img src="telegram-icon.png" alt="Telegram" /></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button" aria-label="Twitter"><img src="twitter-icon.png" alt="Twitter" /></a>
       </div>
     </div>
   </section>
@@ -273,7 +265,7 @@
   <section id="tokenomics">
     <h2>Tokenomics</h2>
     <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
-      <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
+      <strong>Total Supply:</strong> <span style="color: #a56eff;">300,000,000,000 $ZTH</span>
     </p>
     <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
     <div class="legend" id="legend"></div>
@@ -281,6 +273,74 @@
 
   <section id="howto">
     <h2>How to Buy</h2>
-    <div class="story-block">1. Connect your wallet (MetaMask recommended)</div>
-    <div class="story-block">2. Send ETH to the contract address</div>
-    <div class
+    <div class="story-block">
+      Step 1: Connect your wallet by clicking the 'Connect Wallet' button.<br />
+      Step 2: Choose your preferred method - Buy Now or Buy with Card.<br />
+      Step 3: Follow the on-screen instructions to complete your purchase.<br />
+      Step 4: Hold tight and watch your $ZTH grow in your wallet.
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Zenthra. All rights reserved. | <a href="#hero">Back to top</a>
+  </footer>
+
+  <script>
+    // Menü toggle mobilon
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbar = document.getElementById('navbar');
+    menuToggle.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
+
+    // Közösségi ikonok dropdown
+    const toggleSocialsBtn = document.getElementById('toggleSocials');
+    const socialIcons = document.getElementById('socialIcons');
+    toggleSocialsBtn.addEventListener('click', () => {
+      socialIcons.classList.toggle('active');
+    });
+
+    // Visszaszámláló egyszerű demo (pl. 10 perc)
+    const countdownEl = document.getElementById('countdown');
+    const countdownText = document.getElementById('countdown-text');
+    let countdownTime = 10 * 60; // 10 perc másodpercben
+
+    function updateCountdown() {
+      if (countdownTime <= 0) {
+        countdownEl.textContent = '00:00:00';
+        countdownText.textContent = 'Presale is now OPEN!';
+        clearInterval(countdownInterval);
+        return;
+      }
+      const hrs = Math.floor(countdownTime / 3600);
+      const mins = Math.floor((countdownTime % 3600) / 60);
+      const secs = countdownTime % 60;
+      countdownEl.textContent =
+        String(hrs).padStart(2, '0') +
+        ':' +
+        String(mins).padStart(2, '0') +
+        ':' +
+        String(secs).padStart(2, '0');
+      countdownTime--;
+    }
+    updateCountdown();
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Tokenomics chart adatok
+    const ctx = document.getElementById('tokenChart').getContext('2d');
+    const data = {
+      labels: [
+        'Presale (22%)',
+        'Liquidity (23%)',
+        'Marketing/Growth (18%)',
+        'Team (12%)',
+        'Project Development (20%)',
+        'Reserve (5%)'
+      ],
+      datasets: [{
+        label: 'Token Allocation',
+        data: [22, 23, 18, 12, 20, 5],
+        backgroundColor: [
+          '#a56eff',
+          '#6b5bff',
+          '#b56ef
