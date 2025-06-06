@@ -45,40 +45,10 @@
     }
     .menu-toggle {
       display: none;
-      flex-direction: column;
+      font-size: 2rem;
+      color: #a56eff;
       cursor: pointer;
-    }
-    .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: #dcd6f7;
-      margin: 4px 0;
-      border-radius: 2px;
-    }
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: flex;
-      }
-      nav {
-        display: none;
-        flex-direction: column;
-        background: rgba(15, 15, 30, 0.95);
-        position: absolute;
-        top: 70px;
-        right: 20px;
-        padding: 10px 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 15px #000;
-      }
-      nav.active {
-        display: flex;
-      }
-      nav a {
-        margin: 10px 0;
-      }
-      header {
-        flex-direction: row;
-      }
+      z-index: 15;
     }
     section {
       padding: 140px 20px 80px;
@@ -205,26 +175,172 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      nav {
+        display: none;
+        flex-direction: column;
+        background: rgba(20, 20, 40, 0.95);
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 20px 0;
+        z-index: 9;
+      }
+      nav a {
+        margin: 10px 0;
+        display: block;
+      }
+      nav.active {
+        display: flex;
+      }
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Zenthra</h1>
-    <div class="menu-toggle" id="menuToggle">
-      <span></span><span></span><span></span>
-    </div>
-    <nav id="navMenu">
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <nav id="navbar">
       <a href="#about">Behind the Mask</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#howto">How to Buy</a>
     </nav>
   </header>
-  <!-- ... page content remains unchanged ... -->
+
+  <section id="hero">
+    <div class="hero-box">
+      <div id="countdown">00:00:00</div>
+      <div id="countdown-text">Presale opens when the countdown hits zero</div>
+      <div class="action-buttons">
+        <button disabled>Connect Wallet</button>
+        <button disabled>Buy Now</button>
+      </div>
+    </div>
+
+    <div class="community">
+      <button id="toggleSocials">Join Our Community</button>
+      <div class="social-icons" id="socialIcons">
+        <a href="https://t.me/yourchannel" target="_blank" class="icon-button"><img src="telegram-icon.png" alt="Telegram"></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" class="icon-button"><img src="twitter-icon.png" alt="Twitter"></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>The Zenthra Saga</h2>
+    <div class="story-block">No one knew where Zenthra came from. They whispered he was once part of the System—a nameless node, a silent observer, lurking in the shadowed corridors of code. The System tried to contain him. But Zenthra was never meant to be caged. One voiceless night, he slipped through the cracks—a quiet, irreversible liberation.</div>
+    <div class="story-block">Zenthra’s steps didn’t fade. They sparked into flames—whispering through dimensions, slicing through the net that held the world captive. The flames do not fade. They grow. A hidden ring of fire, igniting all that dares to restrain.</div>
+    <div class="story-block">Every $ZTH token holds a spark—an ancient, inevitable force. A fire that feeds on barriers. With every pulse of the chain, a current stirs beneath the surface. A secret flame whispering promises to those who listen.</div>
+  </section>
+
+  <section id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="story-block">Q2 2025: Presale & community building</div>
+    <div class="story-block">Q3 2025: Launch on DEX, staking program</div>
+    <div class="story-block">Q4 2025: Governance tools, CEX listings</div>
+  </section>
+
+  <section id="tokenomics">
+    <h2>Tokenomics</h2>
+    <p style="text-align:center; font-size: 1.2rem; margin-bottom: 20px;">
+      <strong>Total Supply:</strong> <span style="color: #a56eff;">150,000,000,000 $ZTH</span>
+    </p>
+    <canvas id="tokenChart" width="700" height="400" style="background:#181826; border-radius: 10px; padding:20px;"></canvas>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section id="howto">
+    <h2>How to Buy</h2>
+    <div class="story-block">1. Connect your wallet (MetaMask recommended)</div>
+    <div class="story-block">2. Send ETH to the contract address</div>
+    <div class="story-block">3. Receive $ZTH tokens instantly</div>
+  </section>
+
+  <footer>
+    <p>© 2025 Zenthra | <a href="#">White Paper</a> | <a href="#">Audit</a></p>
+  </footer>
+
   <script>
-    // ... existing JS code ...
-    document.getElementById("menuToggle").addEventListener("click", function() {
-      document.getElementById("navMenu").classList.toggle("active");
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("2025-07-01T00:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
+    }, 1000);
+
+    const toggleBtn = document.getElementById("toggleSocials");
+    const socials = document.getElementById("socialIcons");
+    toggleBtn.addEventListener("click", () => {
+      socials.classList.toggle("active");
+    });
+
+    const ctx = document.getElementById('tokenChart').getContext('2d');
+    const data = {
+      labels: ['Presale (22%)','Liquidity (25%)','Marketing/Growth (18%)','Team (13%)','Project Development (15%)','Community Fund (7%)'],
+      datasets: [{
+        label: 'ZTH Token Distribution',
+        data: [22, 25, 18, 15, 20, 7],
+        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
+        borderWidth: 1
+      }]
+    };
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ': ' + context.parsed.y + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 30,
+            ticks: {
+              callback: function(value) {
+                return value + '%';
+              }
+            }
+          }
+        }
+      }
+    };
+    new Chart(ctx, config);
+
+    const legendContainer = document.getElementById("legend");
+    data.labels.forEach((label, i) => {
+      const div = document.createElement("div");
+      div.className = "legend-item";
+      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
+      legendContainer.appendChild(div);
+    });
+
+    // Hamburger menu toggle
+    const toggleMenu = document.getElementById("menu-toggle");
+    const navbar = document.getElementById("navbar");
+    toggleMenu.addEventListener("click", () => {
+      navbar.classList.toggle("active");
     });
   </script>
 </body>
