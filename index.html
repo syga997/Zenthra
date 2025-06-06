@@ -80,6 +80,13 @@
       font-size: 1rem;
       margin-bottom: 30px;
     }
+    #usdtCounter {
+      font-size: 2rem;
+      color: #a56eff;
+      text-shadow: 0 0 15px #a56effcc;
+      margin-bottom: 25px;
+      font-weight: 800;
+    }
     .action-buttons {
       display: flex;
       gap: 20px;
@@ -96,9 +103,16 @@
       border-radius: 4px;
       cursor: pointer;
       box-shadow: 0 0 10px #a56effaa;
+      min-width: 140px;
+      transition: background-color 0.3s ease;
     }
-    button:hover {
+    button:hover:not(:disabled) {
       background: #c4a7e7;
+    }
+    button:disabled {
+      background: #6e5da7;
+      cursor: not-allowed;
+      box-shadow: none;
     }
     .icon-button {
       background: transparent;
@@ -202,6 +216,10 @@
       .action-buttons {
         flex-direction: column;
       }
+      .action-buttons button {
+        width: 100%;
+        min-width: unset;
+      }
     }
   </style>
 </head>
@@ -221,9 +239,11 @@
     <div class="hero-box">
       <div id="countdown">00:00:00</div>
       <div id="countdown-text">Presale opens when the countdown hits zero</div>
+      <div id="usdtCounter">$0 USDT raised</div>
       <div class="action-buttons">
         <button disabled>Connect Wallet</button>
         <button disabled>Buy Now</button>
+        <button disabled>Buy with Card</button>
       </div>
     </div>
 
@@ -263,85 +283,4 @@
     <h2>How to Buy</h2>
     <div class="story-block">1. Connect your wallet (MetaMask recommended)</div>
     <div class="story-block">2. Send ETH to the contract address</div>
-    <div class="story-block">3. Receive $ZTH tokens instantly</div>
-  </section>
-
-  <footer>
-    <p>© 2025 Zenthra | <a href="#">White Paper</a> | <a href="#">Audit</a></p>
-  </footer>
-
-  <script>
-    const countdown = document.getElementById("countdown");
-    const targetDate = new Date("2025-07-01T00:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-      countdown.innerHTML = `${hours}:${minutes}:${seconds}`;
-    }, 1000);
-
-    const toggleBtn = document.getElementById("toggleSocials");
-    const socials = document.getElementById("socialIcons");
-    toggleBtn.addEventListener("click", () => {
-      socials.classList.toggle("active");
-    });
-
-    const ctx = document.getElementById('tokenChart').getContext('2d');
-    const data = {
-      labels: ['Presale (22%)','Liquidity (25%)','Marketing/Growth (18%)','Team (13%)','Project Development (15%)','Community Fund (7%)'],
-      datasets: [{
-        label: 'ZTH Token Distribution',
-        data: [22, 25, 18, 15, 20, 7],
-        backgroundColor: ['#a56eff','#c4a7e7','#7a4bff','#503377','#b479ff','#d7bfff'],
-        borderWidth: 1
-      }]
-    };
-    const config = {
-      type: 'bar',
-      data: data,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.label + ': ' + context.parsed.y + '%';
-              }
-            }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 30,
-            ticks: {
-              callback: function(value) {
-                return value + '%';
-              }
-            }
-          }
-        }
-      }
-    };
-    new Chart(ctx, config);
-
-    const legendContainer = document.getElementById("legend");
-    data.labels.forEach((label, i) => {
-      const div = document.createElement("div");
-      div.className = "legend-item";
-      div.innerHTML = `<span class="color-box" style="background:${data.datasets[0].backgroundColor[i]}"></span>${label}`;
-      legendContainer.appendChild(div);
-    });
-
-    // Hamburger menu toggle
-    const toggleMenu = document.getElementById("menu-toggle");
-    const navbar = document.getElementById("navbar");
-    toggleMenu.addEventListener("click", () => {
-      navbar.classList.toggle("active");
-    });
-  </script>
-</body>
-</html>
+    <div class
