@@ -7,209 +7,50 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #000000;
-      color: #FFFFFF;
+    /* Alap stílus */
+    body { margin: 0; font-family: 'Orbitron', sans-serif; background-color: #000; color: #fff; }
+    header { background: #0A001A; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .logo { font-size: 24px; font-weight: bold; color: #D8CBFF; }
+    nav { display: flex; gap: 15px; }
+    nav a { color: #E1D9FF; text-decoration: none; transition: color 0.3s; }
+    nav a:hover { color: #9D7AFF; }
+    .menu-toggle { display: none; background: none; border: none; color: #D8CBFF; font-size: 28px; cursor: pointer; }
+    .hero { text-align: center; padding: 100px 20px 50px; background: linear-gradient(180deg, #000 0%, #1A0F3D 100%); }
+    .hero h1 { font-size: 3rem; margin-bottom: 10px; color: #fff; }
+    .hero p { font-size: 1.2rem; margin-bottom: 30px; color: #BDAEFF; }
+    .countdown { font-size: 2rem; margin: 20px auto; color: #BDAEFF; }
+    .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+    .cta-buttons button { padding: 15px 30px; border: none; background: #7B3FE4; color: #fff; font-weight: bold; font-size: 1rem; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+    .cta-buttons button:hover { background: #9D7AFF; }
+
+    /* Szekciók */
+    section { padding: 100px 20px; }
+    #behind { background: #0A001A; color: #E1D9FF; }
+    #behind h2, #roadmap h2, #tokenomics h2, #howtobuy h2, #whyzenthra h2, #utility h2, #security h2, #faq h2 {
+      text-align: center; font-size: 2.5rem;
     }
-    header {
-      background: #0A001A;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    #behind div, #howtobuy div, #whyzenthra div, #utility div, #security div, #faq div {
+      max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;
     }
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #D8CBFF;
-    }
-    nav {
-      display: flex;
-      gap: 15px;
-    }
-    nav a {
-      color: #E1D9FF;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #9D7AFF;
-    }
-    .hero {
-      text-align: center;
-      padding: 100px 20px 50px;
-      background: linear-gradient(180deg, #000000 0%, #1A0F3D 100%);
-      color: #FFFFFF;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #BDAEFF;
-      margin-bottom: 30px;
-    }
-    .countdown {
-      font-size: 2rem;
-      margin: 20px auto;
-      color: #BDAEFF;
-    }
-    .cta-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .cta-buttons button {
-      padding: 15px 30px;
-      border: none;
-      background: #7B3FE4;
-      color: #FFFFFF;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1rem;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .cta-buttons button:hover {
-      background: #9D7AFF;
-    }
-    /* Sections */
-    section#behind {
-      padding: 100px 20px;
-      background: #0A001A;
-      color: #E1D9FF;
-    }
-    section#behind h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#behind div {
-      max-width: 800px;
-      margin: 40px auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    section#roadmap {
-      padding: 100px 20px;
-      background: #000000;
-      color: #FFFFFF;
-    }
-    section#roadmap h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#roadmap div {
-      max-width: 900px;
-      margin: 40px auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      font-size: 1rem;
-    }
-    section#tokenomics {
-      padding: 100px 20px;
-      background: #0A001A;
-      color: #D8CBFF;
-    }
-    section#tokenomics h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#howtobuy {
-      padding: 100px 20px;
-      background: #000000;
-      color: #FFFFFF;
-    }
-    section#howtobuy h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#howtobuy div {
-      max-width: 700px;
-      margin: 40px auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    section#whyzenthra {
-      padding: 100px 20px;
-      background: #0A001A;
-      color: #E1D9FF;
-    }
-    section#whyzenthra h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#whyzenthra div {
-      max-width: 700px;
-      margin: 40px auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    section#utility {
-      padding: 100px 20px;
-      background: #000000;
-      color: #FFFFFF;
-    }
-    section#utility h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#utility div {
-      max-width: 700px;
-      margin: 40px auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    section#security {
-      padding: 100px 20px;
-      background: #0A001A;
-      color: #D8CBFF;
-    }
-    section#security h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#security div {
-      max-width: 700px;
-      margin: 40px auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    section#faq {
-      padding: 100px 20px;
-      background: #000000;
-      color: #FFFFFF;
-    }
-    section#faq h2 {
-      text-align: center;
-      font-size: 2.5rem;
-    }
-    section#faq div {
-      max-width: 700px;
-      margin: 40px auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
+    #roadmap { background: #000; color: #fff; }
+    #roadmap div { max-width: 900px; margin: 40px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; font-size: 1rem; }
+    #tokenomics { background: #0A001A; color: #D8CBFF; }
+    #tokenomics h2 { color: inherit; }
+    #howtobuy, #utility, #faq { background: #000; color: #fff; }
+    #whyzenthra, #security { background: #0A001A; color: inherit; }
+
     /* Footer */
-    footer {
-      background: #000000;
-      color: #A89FFF;
-      padding: 40px 20px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    footer a {
-      color: #7B3FE4;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-    footer a:hover {
-      color: #9D7AFF;
+    footer { background: #000; color: #A89FFF; padding: 40px 20px; text-align: center; font-size: 0.9rem; }
+    footer a { color: #7B3FE4; text-decoration: none; margin: 0 10px; }
+    footer a:hover { color: #9D7AFF; }
+
+    /* Mobilbarát logika */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav { display: none; flex-direction: column; background: #0A001A; position: absolute; top: 70px; right: 20px; width: 200px; border: 1px solid #9D7AFF; border-radius: 8px; padding: 10px; z-index: 1000; }
+      nav a { padding: 10px 0; border-bottom: 1px solid #222; }
+      nav.show { display: flex; }
+      #roadmap div { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -217,7 +58,8 @@
 
 <header>
   <div class="logo">ZENTHRA</div>
-  <nav>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="navMenu">
     <a href="#behind">Behind the Mask</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#tokenomics">Tokenomics</a>
@@ -232,160 +74,94 @@
 <section class="hero">
   <h1>Unmask the Future</h1>
   <p>The revolution has no face — only purpose.</p>
-
   <div class="countdown" id="countdown"></div>
-
   <div class="cta-buttons">
     <button>Connect Wallet</button>
     <button>Buy Now</button>
     <button>Buy with Card</button>
   </div>
 </section>
-
 <script>
-  // Countdown Timer to July 15, 2025
   const countdown = () => {
-    const end = new Date("2025-07-15T00:00:00Z").getTime();
-    const now = new Date().getTime();
-    const distance = end - now;
-
-    if (distance < 0) {
-      document.getElementById("countdown").innerHTML = "Presale started!";
+    const now = Date.now();
+    const dist = new Date("2025-07-15T00:00:00Z").getTime() - now;
+    if (dist < 0) {
+      document.getElementById("countdown").innerText = "Presale started!";
       return;
     }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("countdown").innerHTML =
-      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    const d = Math.floor(dist / (1000*60*60*24));
+    const h = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
+    const m = Math.floor((dist % (1000*60*60)) / (1000*60));
+    const s = Math.floor((dist % (1000*60)) / 1000);
+    document.getElementById("countdown").innerText = `${d}d ${h}h ${m}m ${s}s`;
   };
-
   setInterval(countdown, 1000);
+
+  function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("show");
+  }
 </script>
 
-<!-- Behind the Mask Section -->
 <section id="behind">
   <h2>Behind the Mask</h2>
   <div>
     <p><strong>PART I — THE SHIFT</strong><br>
-    He didn't ask for it. He didn’t dream of it. Yet here it is. A force awakened deep within, triggered by the ever-tightening grip of a world obsessed with control. No more. This time, he moves. Silent. Masked. Ready.</p>
-    
+    He didn't ask for it... Silent. Masked. Ready.</p>
     <p><strong>PART II — THE RISE</strong><br>
-    He walks unknown streets, under flickering neon skies, with chains clinking softly like whispers of past failures. Every step is rebellion. Every breath is proof that he still owns his life. Power isn’t given — it’s taken.</p>
-    
+    He walks unknown streets... Power isn’t given — it’s taken.</p>
     <p><strong>PART III — THE PURPOSE</strong><br>
-    This is bigger than him. This is a spark meant to ignite. For those who feel trapped, unseen, undervalued. Zenthra rises not for glory. But for all of us. Because when one breaks the chain — others follow.</p>
+    This is bigger than him... Because when one breaks the chain — others follow.</p>
   </div>
 </section>
 
-<!-- Roadmap Section -->
 <section id="roadmap">
   <h2>Roadmap</h2>
   <div>
     <div><strong>Phase 1:</strong><br>Website Launch, Community Building, Token Creation</div>
     <div><strong>Phase 2:</strong><br>Presale Campaign, Influencer Partnerships, Airdrop Events</div>
-    <div><strong>Phase 3:</strong><br>Token Launch, DEX Listing, CoinGecko & CoinMarketCap Listings</div>
+    <div><strong>Phase 3:</strong><br>Token Launch, DEX Listing, CoinGecko & CMC Listings</div>
     <div><strong>Phase 4:</strong><br>Staking Platform, NFT Series Reveal, DAO Integration</div>
     <div><strong>Phase 5:</strong><br>Major CEX Listings, Mobile App Launch, Zenthra Game Alpha</div>
     <div><strong>Phase 6:</strong><br>Cross-chain Expansion, Global Partnerships, IRL Events</div>
   </div>
 </section>
 
-<!-- Tokenomics Section -->
-<section id="tokenomics" style="padding: 100px 20px; background: #111;">
-  <h2 style="text-align: center; font-size: 2.5rem;">Tokenomics</h2>
-  <canvas id="tokenChart" style="max-width: 700px; margin: 40px auto; display: block;"></canvas>
+<section id="tokenomics">
+  <h2>Tokenomics</h2>
+  <canvas id="tokenChart" style="max-width:700px; margin:40px auto; display:block;"></canvas>
   <script>
     const ctx = document.getElementById("tokenChart").getContext("2d");
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Presale", "Liquidity", "Marketing", "Team", "Development", "Reserve"],
+        labels: ["Presale","Liquidity","Marketing","Team","Development","Reserve"],
         datasets: [{
           label: "Token Allocation",
-          data: [22, 23, 18, 12, 20, 5],
-          backgroundColor: [
-            "#00ffff",
-            "#00cccc",
-            "#009999",
-            "#006666",
-            "#003333",
-            "#001111"
-          ]
+          data: [22,23,18,12,20,5],
+          backgroundColor: ["#7B3FE4","#9D7AFF","#BDAEFF","#D8CBFF","#E1D9FF","#F0EBFF"]
         }]
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 30
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          }
-        }
-      }
+      options: { scales:{ y:{ beginAtZero:true, max:30 }}, plugins:{ legend:{ display:false } } }
     });
   </script>
 </section>
 
-<script>
-  const ctx = document.getElementById('tokenChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Presale 40%', 'Liquidity 20%', 'Team 10%', 'Marketing 15%', 'Staking 10%', 'Reserve 5%'],
-      datasets: [{
-        label: 'Zenthra Token Distribution',
-        data: [40, 20, 10, 15, 10, 5],
-        backgroundColor: [
-          '#7B3FE4',
-          '#9D7AFF',
-          '#BDAEFF',
-          '#D8CBFF',
-          '#E1D9FF',
-          '#F0EBFF'
-        ],
-        borderColor: '#000',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          labels: {
-            color: '#FFFFFF'
-          }
-        }
-      }
-    }
-  });
-</script>
-<!-- How to Buy Section -->
-<section id="howtobuy" style="padding: 100px 20px; background: #000;">
-  <h2 style="text-align: center; font-size: 2.5rem; color: #BDAEFF;">How to Buy</h2>
-  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6; color: #fff;">
+<section id="howtobuy">
+  <h2>How to Buy</h2>
+  <div>
     <ol>
       <li>Connect your wallet (MetaMask, Trust Wallet, etc.) to the website.</li>
       <li>Ensure you have sufficient funds (ETH, BNB, or supported tokens) in your wallet.</li>
-      <li>Choose the amount of Zenthra tokens you wish to purchase during the presale.</li>
+      <li>Choose amount of Zenthra tokens you wish to purchase during presale.</li>
       <li>Confirm the transaction and wait for blockchain confirmation.</li>
-      <li>Tokens will be automatically credited to your wallet once the transaction is successful.</li>
+      <li>Tokens will be automatically credited to your wallet once successful.</li>
     </ol>
-    <p><em style="color: #BDAEFF;">Please note: Purchasing tokens carries risks. This is not financial advice.</em></p>
+    <p><em>Please note: Purchasing tokens carries risks. This is not financial advice.</em></p>
   </div>
 </section>
-
-<!-- Why Zenthra Section -->
-<section id="why" style="padding: 100px 20px; background: #111;">
-  <h2 style="text-align: center; font-size: 2.5rem; color: #BDAEFF;">Why Zenthra?</h2>
-  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6; color: #fff;">
+<section id="whyzenthra">
+  <h2>Why Zenthra?</h2>
+  <div>
     <ul>
       <li>Multi-chain token with real deflationary mechanics increasing scarcity from day one.</li>
       <li>Designed to empower users through community-driven growth without promises of profit.</li>
@@ -395,101 +171,45 @@
   </div>
 </section>
 
-<!-- Utility Section -->
-<section id="utility" style="padding: 100px 20px; background: #000;">
-  <h2 style="text-align: center; font-size: 2.5rem; color: #BDAEFF;">Utility</h2>
-  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6; color: #fff;">
+<section id="utility">
+  <h2>Utility</h2>
+  <div>
     <ul>
       <li>Access to exclusive community events and decision-making votes.</li>
       <li>Early participation in upcoming cross-chain projects and partnerships.</li>
       <li>Token staking opportunities with rewards in native and partner tokens.</li>
-      <li>Continuous token burn to increase long-term value and scarcity.</li>
+      <li>Continuous token burn to increase long‑term value and scarcity.</li>
     </ul>
   </div>
 </section>
 
-<!-- Security Section -->
-<section id="security" style="padding: 100px 20px; background: #111;">
-  <h2 style="text-align: center; font-size: 2.5rem; color: #BDAEFF;">Security & Audit</h2>
-  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6; color: #fff;">
+<section id="security">
+  <h2>Security & Audit</h2>
+  <div>
     <p>Zenthra smart contracts are audited by leading security firms to ensure maximum safety and reliability. Liquidity will be locked from day one, minimizing risks and safeguarding community assets.</p>
     <p>We maintain full transparency and commit to regular updates on audits and security improvements.</p>
   </div>
 </section>
 
-<!-- FAQ Section -->
-<section id="faq" style="padding: 100px 20px; background: #000;">
-  <h2 style="text-align: center; font-size: 2.5rem; color: #BDAEFF;">Frequently Asked Questions</h2>
-  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6; color: #fff;">
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <div>
     <dl>
-      <dt style="color: #9D7AFF;">Is this an investment opportunity?</dt>
+      <dt>Is this an investment opportunity?</dt>
       <dd>No. This project does not provide any financial or investment advice and makes no profit guarantees.</dd>
-
-      <dt style="color: #9D7AFF;">How can I participate in the presale?</dt>
+      <dt>How can I participate in the presale?</dt>
       <dd>Connect your supported wallet and follow the "How to Buy" instructions on this website.</dd>
-
-      <dt style="color: #9D7AFF;">What chains will Zenthra support?</dt>
-      <dd>Multiple leading blockchains, with full cross-chain functionality planned for launch.</dd>
-
-      <dt style="color: #9D7AFF;">How does the burn mechanism work?</dt>
+      <dt>What chains will Zenthra support?</dt>
+      <dd>Multiple leading blockchains, with full cross‑chain functionality planned for launch.</dd>
+      <dt>How does the burn mechanism work?</dt>
       <dd>A small percentage of each transaction is automatically burned, reducing total supply and increasing scarcity over time.</dd>
     </dl>
   </div>
 </section>
 
-<!-- Countdown Timer Section -->
-<section id="countdown" style="padding: 60px 20px; background: #111; color: #fff; text-align: center;">
-  <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #BDAEFF;">Presale Countdown</h2>
-  <div id="timer" style="font-size: 3rem; font-weight: bold; letter-spacing: 0.1em;"></div>
-  <div style="margin-top: 30px;">
-    <button id="connectWalletBtn" style="margin: 0 10px; padding: 15px 30px; font-size: 1rem; cursor: pointer; background: #BDAEFF; color: #000; border: none; border-radius: 5px;">Connect Wallet</button>
-    <button id="buyNowBtn" style="margin: 0 10px; padding: 15px 30px; font-size: 1rem; cursor: pointer; background: #BDAEFF; color: #000; border: none; border-radius: 5px;">Buy Now</button>
-    <button id="buyWithCardBtn" style="margin: 0 10px; padding: 15px 30px; font-size: 1rem; cursor: pointer; background: #BDAEFF; color: #000; border: none; border-radius: 5px;">Buy with Card</button>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer style="background: #000; color: #888; padding: 40px 20px; text-align: center; font-size: 0.9rem;">
+<footer>
   <p>&copy; 2025 Zenthra Project. All rights reserved.</p>
-  <p>
-    <a href="#privacy" style="color: #9D7AFF; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
-    <a href="#terms" style="color: #9D7AFF; text-decoration: none; margin: 0 10px;">Terms of Use</a>
-  </p>
+  <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Use</a></p>
 </footer>
-
-<script>
-  // Countdown Timer
-  const countdownDate = new Date('2025-07-15T00:00:00Z').getTime();
-
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = countdownDate - now;
-
-    if (distance < 0) {
-      document.getElementById('timer').innerHTML = "Presale Ended";
-      clearInterval(timerInterval);
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById('timer').innerHTML = 
-      `${days}d ${hours.toString().padStart(2,'0')}h ${minutes.toString().padStart(2,'0')}m ${seconds.toString().padStart(2,'0')}s`;
-  }
-
-  const timerInterval = setInterval(updateCountdown, 1000);
-  updateCountdown();
-
-  document.getElementById('connectWalletBtn').addEventListener('click', () => {
-    alert('Connect Wallet function will be implemented here.');
-  });
-  document.getElementById('buyNowBtn').addEventListener('click', () => {
-    alert('Buy Now function will be implemented here.');
-  });
-  document.getElementById('buyWithCardBtn').addEventListener('click', () => {
-    alert('Buy with Card function will be implemented here.');
-  });
-</script>
+</body>
+</html>
