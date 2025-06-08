@@ -295,9 +295,43 @@
 </section>
 
 <!-- Tokenomics Section -->
-<section id="tokenomics">
-  <h2>Tokenomics</h2>
-  <canvas id="tokenChart" width="400" height="400"></canvas>
+<section id="tokenomics" style="padding: 100px 20px; background: #111;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Tokenomics</h2>
+  <canvas id="tokenChart" style="max-width: 700px; margin: 40px auto; display: block;"></canvas>
+  <script>
+    const ctx = document.getElementById("tokenChart").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Presale", "Liquidity", "Marketing", "Team", "Development", "Reserve"],
+        datasets: [{
+          label: "Token Allocation",
+          data: [22, 23, 18, 12, 20, 5],
+          backgroundColor: [
+            "#00ffff",
+            "#00cccc",
+            "#009999",
+            "#006666",
+            "#003333",
+            "#001111"
+          ]
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 30
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  </script>
 </section>
 
 <script>
