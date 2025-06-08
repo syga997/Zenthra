@@ -80,7 +80,204 @@
 <body>
 
 <header>
-  <div class="logo">ZENTHRA</div>
+  <nav class="navbar">
+  <div class="logo">Zenthra</div>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#behind-the-mask" class="glitch" data-text="Behind the Mask">Behind the Mask</a></li>
+    <li><a href="#roadmap" class="glitch" data-text="Roadmap">Roadmap</a></li>
+    <li><a href="#tokenomics" class="glitch" data-text="Tokenomics">Tokenomics</a></li>
+    <li><a href="#how-to-buy" class="glitch" data-text="How to Buy">How to Buy</a></li>
+  </ul>
+</nav>
+
+<style>
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #111;
+    color: #eee;
+    position: relative;
+    z-index: 999;
+  }
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 25px;
+    height: 20px;
+    justify-content: space-between;
+    z-index: 1001;
+  }
+  .hamburger span {
+    height: 3px;
+    background-color: #eee;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+  }
+  /* Hamburger animáció X-re */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+  }
+  .nav-links li a {
+    color: #eee;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    position: relative;
+    font-family: 'Orbitron', sans-serif;
+  }
+  .nav-links li a:hover {
+    color: #1DB954;
+  }
+
+  /* Glitch effekt */
+  .glitch {
+    position: relative;
+    color: #eee;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0.8;
+    clip: rect(0, 0, 0, 0);
+  }
+  .glitch::before {
+    animation: glitch-anim-before 2s infinite linear alternate-reverse;
+    color: #1db954;
+    left: 2px;
+    text-shadow: -2px 0 #1db954;
+  }
+  .glitch::after {
+    animation: glitch-anim-after 3s infinite linear alternate-reverse;
+    color: #ff005c;
+    left: -2px;
+    text-shadow: 2px 0 #ff005c;
+  }
+
+  @keyframes glitch-anim-before {
+    0% {
+      clip: rect(0, 9999px, 0, 0);
+    }
+    10% {
+      clip: rect(0, 9999px, 5px, 0);
+      transform: translate(-2px, -2px);
+    }
+    20% {
+      clip: rect(5px, 9999px, 10px, 0);
+      transform: translate(2px, 2px);
+    }
+    30% {
+      clip: rect(10px, 9999px, 15px, 0);
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      clip: rect(15px, 9999px, 20px, 0);
+      transform: translate(2px, -2px);
+    }
+    50% {
+      clip: rect(20px, 9999px, 25px, 0);
+      transform: translate(0);
+    }
+    100% {
+      clip: rect(0, 9999px, 0, 0);
+      transform: translate(0);
+    }
+  }
+  @keyframes glitch-anim-after {
+    0% {
+      clip: rect(0, 9999px, 0, 0);
+    }
+    10% {
+      clip: rect(5px, 9999px, 10px, 0);
+      transform: translate(2px, 2px);
+    }
+    20% {
+      clip: rect(10px, 9999px, 15px, 0);
+      transform: translate(-2px, -2px);
+    }
+    30% {
+      clip: rect(15px, 9999px, 20px, 0);
+      transform: translate(2px, -2px);
+    }
+    40% {
+      clip: rect(20px, 9999px, 25px, 0);
+      transform: translate(-2px, 2px);
+    }
+    50% {
+      clip: rect(25px, 9999px, 30px, 0);
+      transform: translate(0);
+    }
+    100% {
+      clip: rect(0, 9999px, 0, 0);
+      transform: translate(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+    .nav-links {
+      position: absolute;
+      top: 65px;
+      right: 0;
+      background-color: #111;
+      flex-direction: column;
+      width: 220px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      padding: 20px;
+      border-radius: 0 0 0 8px;
+    }
+    .nav-links.active {
+      transform: translateX(0);
+    }
+    .nav-links li {
+      margin-bottom: 20px;
+    }
+  }
+</style>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
+</script>
+<div class="logo">ZENTHRA</div>
   <nav>
     <a href="#behind">Behind the Mask</a>
     <a href="#roadmap">Roadmap</a>
