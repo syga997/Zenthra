@@ -156,15 +156,16 @@
 </section>
 
 <!-- Tokenomics Section -->
+<section id="tokenomics" style="padding: 100px 20px; background: #111;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Tokenomics</h2>
+  <canvas id="tokenChart" style="max-width: 700px; margin: 40px auto; display: block;"></canvas>
   <section id="tokenomics" style="text-align: center; color: #eee;">
   <h3 style="font-weight: 700; font-size: 1.3rem; margin-bottom: 15px;">
     Zenthra Total Supply: <span style="color: #1DB954;">150,000,000,000 tokens</span>
   </h3>
   <canvas id="tokenomicsChart"></canvas>
 </section>
-<section id="tokenomics" style="padding: 100px 20px; background: #111;">
-  <h2 style="text-align: center; font-size: 2.5rem;">Tokenomics</h2>
-  <canvas id="tokenChart" style="max-width: 700px; margin: 40px auto; display: block;"></canvas>
+
   <script>
     const ctx = document.getElementById("tokenChart").getContext("2d");
     new Chart(ctx, {
