@@ -1,366 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Zenthra Project</title>
-<style>
-  /* Reset & base */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1f1f2e;
-    color: #e0e0e0;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-  a {
-    color: #7b5cff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  a:hover {
-    color: #a085ff;
-  }
-
-  /* Header and nav */
-  header {
-    background-color: #292a3c;
-    padding: 15px 20px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #7b5cff;
-  }
-  nav {
-    position: relative;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-  }
-  nav ul li {
-    font-weight: 600;
-  }
-  nav ul li a {
-    font-size: 1rem;
-    padding: 5px 0;
-    display: inline-block;
-  }
-
-  /* Hamburger menu */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    width: 25px;
-    height: 20px;
-    justify-content: space-between;
-  }
-  .hamburger span {
-    display: block;
-    height: 3px;
-    background: #7b5cff;
-    border-radius: 2px;
-  }
-
-  /* Mobile menu */
-  @media (max-width: 768px) {
-    nav ul {
-      flex-direction: column;
-      background-color: #292a3c;
-      position: fixed;
-      top: 60px;
-      right: -100%;
-      width: 200px;
-      height: calc(100vh - 60px);
-      padding-top: 20px;
-      gap: 15px;
-      transition: right 0.3s ease;
-      box-shadow: -3px 0 8px rgba(0,0,0,0.7);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenthra - The Masked Revolution</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #fff;
     }
-    nav ul.active {
-      right: 0;
-    }
-    .hamburger {
+    header {
+      background: #111;
+      padding: 20px;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-  }
-
-  /* Sections */
-  section {
-    max-width: 1000px;
-    margin: 90px auto 40px;
-    padding: 0 20px;
-  }
-  h2 {
-    color: #7b5cff;
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 2rem;
-    text-align: center;
-  }
-  p {
-    margin-bottom: 16px;
-    color: #cfcfe8;
-  }
-
-  /* Countdown & buttons container */
-  .countdown-buttons-container {
-    background-color: #292a3c;
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-  }
-  .countdown {
-    color: #e0e0e0;
-    font-size: 1.8rem;
-    font-weight: 700;
-    flex: 1 1 200px;
-    text-align: center;
-  }
-  .btn {
-    background-color: #7b5cff;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 6px;
-    color: #fff;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex: 1 1 150px;
-    text-align: center;
-    user-select: none;
-  }
-  .btn:hover {
-    background-color: #a085ff;
-  }
-
-  /* Storytelling sections */
-  .story-section {
-    background-color: #292a3c;
-    padding: 25px;
-    border-radius: 10px;
-    margin-bottom: 40px;
-  }
-  .story-text {
-    font-size: 1.1rem;
-    color: #d4d3e2;
-    line-height: 1.5;
-    white-space: pre-line;
-  }
-
-  /* Tokenomics chart container */
-  #tokenomicsChart {
-    background-color: #292a3c !important;
-    border-radius: 12px !important;
-    padding: 10px !important;
-  }
-
-  /* Footer with social icons */
-  footer {
-    background-color: #292a3c;
-    color: #cfcfe8;
-    text-align: center;
-    padding: 20px 10px;
-    font-size: 0.9rem;
-  }
-  .social-icons {
-    margin-top: 10px;
-  }
-  .social-icons a {
-    margin: 0 10px;
-    color: #7b5cff;
-    font-size: 1.4rem;
-    transition: color 0.3s ease;
-  }
-  .social-icons a:hover {
-    color: #a085ff;
-  }
-</style>
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #0ff;
+    }
+    .hero {
+      text-align: center;
+      padding: 100px 20px 50px;
+      background: linear-gradient(180deg, #000 0%, #111 100%);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+    .countdown {
+      font-size: 2rem;
+      margin: 20px auto;
+    }
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .cta-buttons button {
+      padding: 15px 30px;
+      border: none;
+      background: #0ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .cta-buttons button:hover {
+      background: #00c7c7;
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Zenthra</div>
+  <div class="logo">ZENTHRA</div>
   <nav>
-    <div class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation" role="button" tabindex="0">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul id="navMenu" role="menu">
-      <li><a href="#behind-the-mask" role="menuitem" tabindex="0">Behind the Mask</a></li>
-      <li><a href="#roadmap" role="menuitem" tabindex="0">Roadmap</a></li>
-      <li><a href="#tokenomics" role="menuitem" tabindex="0">Tokenomics</a></li>
-      <li><a href="#how-to-buy" role="menuitem" tabindex="0">How to Buy</a></li>
-    </ul>
+    <a href="#behind">Behind the Mask</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#howtobuy">How to Buy</a>
+    <a href="#why">Why Zenthra?</a>
+    <a href="#utility">Utility</a>
+    <a href="#security">Security</a>
+    <a href="#faq">FAQ</a>
   </nav>
 </header>
 
-<main>
+<section class="hero">
+  <h1>Unmask the Future</h1>
+  <p>The revolution has no face — only purpose.</p>
 
-  <section id="behind-the-mask" class="story-section" tabindex="0">
-    <h2>Behind the Mask</h2>
-    <p class="story-text">
-      The shadow looms. Chains rattle in silence. Zenthra rises from the depths, a thin figure cloaked in mystery, defying the weight of a world that binds.
-    </p>
-    <p class="story-text">
-      A rebellion not with swords but with will. The mundane shackles shatter as freedom whispers his name.
-    </p>
-    <p class="story-text">
-      Behind every mask lies a story, a fire burning fiercely in the darkest night.
-    </p>
-  </section>
+  <div class="countdown" id="countdown"></div>
 
-  <section id="roadmap" tabindex="0">
-    <h2>Roadmap</h2>
-    <p>Coming soon...</p>
-  </section>
-
-  <section id="tokenomics" tabindex="0">
-    <h2>Tokenomics</h2>
-    <canvas id="tokenomicsChart" width="600" height="400"></canvas>
-  </section>
-
-  <section id="how-to-buy" tabindex="0">
-    <h2>How to Buy</h2>
-    <p>Instructions and details coming soon...</p>
-  </section>
-
-  <section class="countdown-buttons-container" aria-label="Countdown and actions">
-    <div class="countdown" id="countdownTimer" aria-live="polite" aria-atomic="true">00:00:00</div>
-    <button class="btn" id="connectWalletBtn" type="button">Connect Wallet</button>
-    <button class="btn" id="buyNowBtn" type="button">Buy Now</button>
-    <button class="btn" id="buyCardBtn" type="button">Buy with Card</button>
-  </section>
-
-</main>
-
-<footer>
-  &copy; 2025 Zenthra Project
-  <div class="social-icons" aria-label="Social media links">
-    <a href="#" aria-label="Twitter" target="_blank" rel="noopener noreferrer" tabindex="0">🐦</a>
-    <a href="#" aria-label="Telegram" target="_blank" rel="noopener noreferrer" tabindex="0">✈️</a>
+  <div class="cta-buttons">
+    <button>Connect Wallet</button>
+    <button>Buy Now</button>
+    <button>Buy with Card</button>
   </div>
-</footer>
+</section>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Hamburger menu toggle
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const navMenu = document.getElementById('navMenu');
+  // Countdown Timer to July 15, 2025
+  const countdown = () => {
+    const end = new Date("2025-07-15T00:00:00Z").getTime();
+    const now = new Date().getTime();
+    const distance = end - now;
 
-  hamburgerBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-  hamburgerBtn.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      navMenu.classList.toggle('active');
-    }
-  });
-
-  // Tokenomics Chart setup
-  const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-  const tokenomicsChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: [
-        'Presale (22%)',
-        'Liquidity (23%)',
-        'Marketing/Growth (18%)',
-        'Team (12%)',
-        'Project Development (20%)',
-        'Reserve (5%)'
-      ],
-      datasets: [{
-        label: 'Token Distribution',
-        data: [22, 23, 18, 12, 20, 5],
-        backgroundColor: [
-          '#7b5cff',
-          '#a085ff',
-          '#7b5cffcc',
-          '#a085ffcc',
-          '#7b5cff88',
-          '#a085ff88'
-        ],
-        borderColor: '#1f1f2e',
-        borderWidth: 2,
-        hoverOffset: 20
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          labels: {
-            color: '#e0e0e0',
-            font: {
-              size: 14,
-              weight: 'bold'
-            }
-          }
-        },
-        tooltip: {
-          backgroundColor: '#292a3c',
-          titleColor: '#7b5cff',
-          bodyColor: '#e0e0e0',
-        }
-      }
-    }
-  });
-
-  // Countdown timer example (static placeholder)
-  const countdownTimer = document.getElementById('countdownTimer');
-  function updateCountdown() {
-    // Example countdown set to 1 hour from now for demo
-    const target = new Date(Date.now() + 3600 * 1000);
-    const now = new Date();
-    const diff = target - now;
-
-    if(diff <= 0) {
-      countdownTimer.textContent = "00:00:00";
+    if (distance < 0) {
+      document.getElementById("countdown").innerHTML = "Presale started!";
       return;
     }
 
-    const hours = Math.floor(diff / (1000 * 60 * 60)).toString().padStart(2,'0');
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000*60)).toString().padStart(2,'0');
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2,'0');
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    countdownTimer.textContent = `${hours}:${minutes}:${seconds}`;
-  }
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
+    document.getElementById("countdown").innerHTML =
+      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  };
 
-  // Placeholder button handlers
-  document.getElementById('connectWalletBtn').addEventListener('click', () => {
-    alert('Connect Wallet clicked');
-  });
-  document.getElementById('buyNowBtn').addEventListener('click', () => {
-    alert('Buy Now clicked');
-  });
-  document.getElementById('buyCardBtn').addEventListener('click', () => {
-    alert('Buy with Card clicked');
-  });
+  setInterval(countdown, 1000);
 </script>
+<!-- Behind the Mask Section -->
+<section id="behind" style="padding: 100px 20px; background: #111;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Behind the Mask</h2>
+  <div style="max-width: 800px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;">
+    <p><strong>PART I — THE SHIFT</strong><br>
+    He didn't ask for it. He didn’t dream of it. Yet here it is. A force awakened deep within, triggered by the ever-tightening grip of a world obsessed with control. No more. This time, he moves. Silent. Masked. Ready.</p>
+    
+    <p><strong>PART II — THE RISE</strong><br>
+    He walks unknown streets, under flickering neon skies, with chains clinking softly like whispers of past failures. Every step is rebellion. Every breath is proof that he still owns his life. Power isn’t given — it’s taken.</p>
+    
+    <p><strong>PART III — THE PURPOSE</strong><br>
+    This is bigger than him. This is a spark meant to ignite. For those who feel trapped, unseen, undervalued. Zenthra rises not for glory. But for all of us. Because when one breaks the chain — others follow.</p>
+  </div>
+</section>
 
-</body>
-</html>
+<!-- Roadmap Section -->
+<section id="roadmap" style="padding: 100px 20px; background: #000;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Roadmap</h2>
+  <div style="max-width: 900px; margin: 40px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; font-size: 1rem;">
+    <div><strong>Phase 1:</strong><br>Website Launch, Community Building, Token Creation</div>
+    <div><strong>Phase 2:</strong><br>Presale Campaign, Influencer Partnerships, Airdrop Events</div>
+    <div><strong>Phase 3:</strong><br>DEX Listing, Liquidity Lock, Marketing Push</div>
+    <div><strong>Phase 4:</strong><br>Cross-chain Expansion, Burn Mechanics Launch, Utility Reveal</div>
+  </div>
+</section>
+
+<!-- Tokenomics Section -->
+<section id="tokenomics" style="padding: 100px 20px; background: #111;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Tokenomics</h2>
+  <canvas id="tokenChart" style="max-width: 700px; margin: 40px auto; display: block;"></canvas>
+  <script>
+    const ctx = document.getElementById("tokenChart").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Presale", "Liquidity", "Marketing", "Team", "Development", "Reserve"],
+        datasets: [{
+          label: "Token Allocation",
+          data: [22, 23, 18, 12, 20, 5],
+          backgroundColor: [
+            "#00ffff",
+            "#00cccc",
+            "#009999",
+            "#006666",
+            "#003333",
+            "#001111"
+          ]
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 30
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  </script>
+</section>
+<!-- How to Buy Section -->
+<section id="howtobuy" style="padding: 100px 20px; background: #000;">
+  <h2 style="text-align: center; font-size: 2.5rem;">How to Buy</h2>
+  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;">
+    <ol>
+      <li>Connect your wallet (MetaMask, Trust Wallet, etc.) to the website.</li>
+      <li>Ensure you have sufficient funds (ETH, BNB, or supported tokens) in your wallet.</li>
+      <li>Choose the amount of Zenthra tokens you wish to purchase during the presale.</li>
+      <li>Confirm the transaction and wait for blockchain confirmation.</li>
+      <li>Tokens will be automatically credited to your wallet once the transaction is successful.</li>
+    </ol>
+    <p><em>Please note: Purchasing tokens carries risks. This is not financial advice.</em></p>
+  </div>
+</section>
+
+<!-- Why Zenthra Section -->
+<section id="whyzenthra" style="padding: 100px 20px; background: #111;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Why Zenthra?</h2>
+  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;">
+    <ul>
+      <li>Multi-chain token with real deflationary mechanics increasing scarcity from day one.</li>
+      <li>Designed to empower users through community-driven growth without promises of profit.</li>
+      <li>Transparent, secure, and audited smart contracts ensuring trust and reliability.</li>
+      <li>Innovative burn mechanism that automatically reduces token supply with every transaction.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Utility Section -->
+<section id="utility" style="padding: 100px 20px; background: #000;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Utility</h2>
+  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;">
+    <ul>
+      <li>Access to exclusive community events and decision-making votes.</li>
+      <li>Early participation in upcoming cross-chain projects and partnerships.</li>
+      <li>Token staking opportunities with rewards in native and partner tokens.</li>
+      <li>Continuous token burn to increase long-term value and scarcity.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Security Section -->
+<section id="security" style="padding: 100px 20px; background: #111;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Security & Audit</h2>
+  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;">
+    <p>Zenthra smart contracts are audited by leading security firms to ensure maximum safety and reliability. Liquidity will be locked from day one, minimizing risks and safeguarding community assets.</p>
+    <p>We maintain full transparency and commit to regular updates on audits and security improvements.</p>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" style="padding: 100px 20px; background: #000;">
+  <h2 style="text-align: center; font-size: 2.5rem;">Frequently Asked Questions</h2>
+  <div style="max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;">
+    <dl>
+      <dt>Is this an investment opportunity?</dt>
+      <dd>No. This project does not provide any financial or investment advice and makes no profit guarantees.</dd>
+      
+      <dt>How can I participate in the presale?</dt>
+      <dd>Connect your supported wallet and follow the "How to Buy" instructions on this website.</dd>
+      
+      <dt>What chains will Zenthra support?</dt>
+      <dd>Multiple leading blockchains, with full cross-chain functionality planned for launch.</dd>
+      
+      <dt>How does the burn mechanism work?</dt>
+      <dd>A small percentage of each transaction is automatically burned, reducing total supply and increasing scarcity over time.</dd>
+    </dl>
+  </div>
+</section>
+<!-- Countdown Timer Section -->
+<section id="countdown" style="padding: 60px 20px; background: #111; color: #fff; text-align: center;">
+  <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Presale Countdown</h2>
+  <div id="timer" style="font-size: 3rem; font-weight: bold; letter-spacing: 0.1em;"></div>
+  <div style="margin-top: 30px;">
+    <button id="connectWalletBtn" style="margin: 0 10px; padding: 15px 30px; font-size: 1rem; cursor: pointer;">Connect Wallet</button>
+    <button id="buyNowBtn" style="margin: 0 10px; padding: 15px 30px; font-size: 1rem; cursor: pointer;">Buy Now</button>
+    <button id="buyWithCardBtn" style="margin: 0 10px; padding: 15px 30px; font-size: 1rem; cursor: pointer;">Buy with Card</button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background: #000; color: #888; padding: 40px 20px; text-align: center; font-size: 0.9rem;">
+  <p>&copy; 2025 Zenthra Project. All rights reserved.</p>
+  <p>
+    <a href="#privacy" style="color: #555; text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+    <a href="#terms" style="color: #555; text-decoration: none; margin: 0 10px;">Terms of Use</a>
+  </p>
+</footer>
+
+<script>
+// Countdown Timer to July 15, 2025 00:00:00 UTC
+const countdownDate = new Date('2025-07-15T00:00:00Z').getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = countdownDate - now;
+
+  if (distance < 0) {
+    document.getElementById('timer').innerHTML = "Presale Ended";
+    clearInterval(timerInterval);
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById('timer').innerHTML = 
+    `${days}d ${hours.toString().padStart(2,'0')}h ${minutes.toString().padStart(2,'0')}m ${seconds.toString().padStart(2,'0')}s`;
+}
+
+const timerInterval = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Button event handlers (placeholder)
+document.getElementById('connectWalletBtn').addEventListener('click', () => {
+  alert('Connect Wallet function will be implemented here.');
+});
+document.getElementById('buyNowBtn').addEventListener('click', () => {
+  alert('Buy Now function will be implemented here.');
+});
+document.getElementById('buyWithCardBtn').addEventListener('click', () => {
+  alert('Buy with Card function will be implemented here.');
+});
+</script>
