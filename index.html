@@ -3,213 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zenthra - The Masked Revolution</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    /* Alap stílus */
-    body { margin: 0; font-family: 'Orbitron', sans-serif; background-color: #000; color: #fff; }
-    header { background: #0A001A; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
-    .logo { font-size: 24px; font-weight: bold; color: #D8CBFF; }
-    nav { display: flex; gap: 15px; }
-    nav a { color: #E1D9FF; text-decoration: none; transition: color 0.3s; }
-    nav a:hover { color: #9D7AFF; }
-    .menu-toggle { display: none; background: none; border: none; color: #D8CBFF; font-size: 28px; cursor: pointer; }
-    .hero { text-align: center; padding: 100px 20px 50px; background: linear-gradient(180deg, #000 0%, #1A0F3D 100%); }
-    .hero h1 { font-size: 3rem; margin-bottom: 10px; color: #fff; }
-    .hero p { font-size: 1.2rem; margin-bottom: 30px; color: #BDAEFF; }
-    .countdown { font-size: 2rem; margin: 20px auto; color: #BDAEFF; }
-    .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
-    .cta-buttons button { padding: 15px 30px; border: none; background: #7B3FE4; color: #fff; font-weight: bold; font-size: 1rem; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
-    .cta-buttons button:hover { background: #9D7AFF; }
-
-    /* Szekciók */
-    section { padding: 100px 20px; }
-    #behind { background: #0A001A; color: #E1D9FF; }
-    #behind h2, #roadmap h2, #tokenomics h2, #howtobuy h2, #whyzenthra h2, #utility h2, #security h2, #faq h2 {
-      text-align: center; font-size: 2.5rem;
-    }
-    #behind div, #howtobuy div, #whyzenthra div, #utility div, #security div, #faq div {
-      max-width: 700px; margin: 40px auto; font-size: 1.1rem; line-height: 1.6;
-    }
-    #roadmap { background: #000; color: #fff; }
-    #roadmap div { max-width: 900px; margin: 40px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; font-size: 1rem; }
-    #tokenomics { background: #0A001A; color: #D8CBFF; }
-    #tokenomics h2 { color: inherit; }
-    #howtobuy, #utility, #faq { background: #000; color: #fff; }
-    #whyzenthra, #security { background: #0A001A; color: inherit; }
-
-    /* Footer */
-    footer { background: #000; color: #A89FFF; padding: 40px 20px; text-align: center; font-size: 0.9rem; }
-    footer a { color: #7B3FE4; text-decoration: none; margin: 0 10px; }
-    footer a:hover { color: #9D7AFF; }
-
-    /* Mobilbarát logika */
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      nav { display: none; flex-direction: column; background: #0A001A; position: absolute; top: 70px; right: 20px; width: 200px; border: 1px solid #9D7AFF; border-radius: 8px; padding: 10px; z-index: 1000; }
-      nav a { padding: 10px 0; border-bottom: 1px solid #222; }
-      nav.show { display: flex; }
-      #roadmap div { grid-template-columns: 1fr !important; }
-    }
-  </style>
+  <title>Zenthra | Crypto Presale</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/app.js"></script>
+  <script defer src="js/web3.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <!-- BACKGROUND EFFECT -->
+  <canvas id="background-canvas"></canvas>
 
-<header>
-  <div class="logo">ZENTHRA</div>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav id="navMenu">
-    <a href="#behind">Behind the Mask</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#tokenomics">Tokenomics</a>
-    <a href="#howtobuy">How to Buy</a>
-    <a href="#whyzenthra">Why Zenthra?</a>
-    <a href="#utility">Utility</a>
-    <a href="#security">Security</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-</header>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Uncage the Chain.</h1>
+      <p class="hero-subtitle">Presale Begins July 15, 2025</p>
 
-<section class="hero">
-  <h1>Unmask the Future</h1>
-  <p>The revolution has no face — only purpose.</p>
-  <div class="countdown" id="countdown"></div>
-  <div class="cta-buttons">
-    <button>Connect Wallet</button>
-    <button>Buy Now</button>
-    <button>Buy with Card</button>
-  </div>
-</section>
-<script>
-  const countdown = () => {
-    const now = Date.now();
-    const dist = new Date("2025-07-15T00:00:00Z").getTime() - now;
-    if (dist < 0) {
-      document.getElementById("countdown").innerText = "Presale started!";
-      return;
-    }
-    const d = Math.floor(dist / (1000*60*60*24));
-    const h = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
-    const m = Math.floor((dist % (1000*60*60)) / (1000*60));
-    const s = Math.floor((dist % (1000*60)) / 1000);
-    document.getElementById("countdown").innerText = `${d}d ${h}h ${m}m ${s}s`;
-  };
-  setInterval(countdown, 1000);
+      <div class="countdown" id="countdown"></div>
 
-  function toggleMenu() {
-    document.getElementById("navMenu").classList.toggle("show");
-  }
-</script>
+      <div class="price-box">
+        <p>Current Presale Price:</p>
+        <h2 id="current-price">$0.0005</h2>
+        <p class="next-phase">Next price: <span id="next-price">$0.0007</span></p>
+      </div>
 
-<section id="behind">
-  <h2>Behind the Mask</h2>
-  <div>
-    <p><strong>PART I — THE SHIFT</strong><br>
-    He didn't ask for it... Silent. Masked. Ready.</p>
-    <p><strong>PART II — THE RISE</strong><br>
-    He walks unknown streets... Power isn’t given — it’s taken.</p>
-    <p><strong>PART III — THE PURPOSE</strong><br>
-    This is bigger than him... Because when one breaks the chain — others follow.</p>
-  </div>
-</section>
-
-<section id="roadmap">
-  <h2>Roadmap</h2>
-  <div>
-    <div><strong>Phase 1:</strong><br>Website Launch, Community Building, Token Creation</div>
-    <div><strong>Phase 2:</strong><br>Presale Campaign, Influencer Partnerships, Airdrop Events</div>
-    <div><strong>Phase 3:</strong><br>Token Launch, DEX Listing, CoinGecko & CMC Listings</div>
-    <div><strong>Phase 4:</strong><br>Staking Platform, NFT Series Reveal, DAO Integration</div>
-    <div><strong>Phase 5:</strong><br>Major CEX Listings, Mobile App Launch, Zenthra Game Alpha</div>
-    <div><strong>Phase 6:</strong><br>Cross-chain Expansion, Global Partnerships, IRL Events</div>
-  </div>
-</section>
-
-<section id="tokenomics">
-  <h2>Tokenomics</h2>
-  <canvas id="tokenChart" style="max-width:700px; margin:40px auto; display:block;"></canvas>
-  <script>
-    const ctx = document.getElementById("tokenChart").getContext("2d");
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Presale","Liquidity","Marketing","Team","Development","Reserve"],
-        datasets: [{
-          label: "Token Allocation",
-          data: [22,23,18,12,20,5],
-          backgroundColor: ["#7B3FE4","#9D7AFF","#BDAEFF","#D8CBFF","#E1D9FF","#F0EBFF"]
-        }]
-      },
-      options: { scales:{ y:{ beginAtZero:true, max:30 }}, plugins:{ legend:{ display:false } } }
-    });
-  </script>
-</section>
-
-<section id="howtobuy">
-  <h2>How to Buy</h2>
-  <div>
-    <ol>
-      <li>Connect your wallet (MetaMask, Trust Wallet, etc.) to the website.</li>
-      <li>Ensure you have sufficient funds (ETH, BNB, or supported tokens) in your wallet.</li>
-      <li>Choose amount of Zenthra tokens you wish to purchase during presale.</li>
-      <li>Confirm the transaction and wait for blockchain confirmation.</li>
-      <li>Tokens will be automatically credited to your wallet once successful.</li>
-    </ol>
-    <p><em>Please note: Purchasing tokens carries risks. This is not financial advice.</em></p>
-  </div>
-</section>
-<section id="whyzenthra">
-  <h2>Why Zenthra?</h2>
-  <div>
-    <ul>
-      <li>Multi-chain token with real deflationary mechanics increasing scarcity from day one.</li>
-      <li>Designed to empower users through community-driven growth without promises of profit.</li>
-      <li>Transparent, secure, and audited smart contracts ensuring trust and reliability.</li>
-      <li>Innovative burn mechanism that automatically reduces token supply with every transaction.</li>
-    </ul>
-  </div>
-</section>
-
-<section id="utility">
-  <h2>Utility</h2>
-  <div>
-    <ul>
-      <li>Access to exclusive community events and decision-making votes.</li>
-      <li>Early participation in upcoming cross-chain projects and partnerships.</li>
-      <li>Token staking opportunities with rewards in native and partner tokens.</li>
-      <li>Continuous token burn to increase long‑term value and scarcity.</li>
-    </ul>
-  </div>
-</section>
-
-<section id="security">
-  <h2>Security & Audit</h2>
-  <div>
-    <p>Zenthra smart contracts are audited by leading security firms to ensure maximum safety and reliability. Liquidity will be locked from day one, minimizing risks and safeguarding community assets.</p>
-    <p>We maintain full transparency and commit to regular updates on audits and security improvements.</p>
-  </div>
-</section>
-
-<section id="faq">
-  <h2>Frequently Asked Questions</h2>
-  <div>
-    <dl>
-      <dt>Is this an investment opportunity?</dt>
-      <dd>No. This project does not provide any financial or investment advice and makes no profit guarantees.</dd>
-      <dt>How can I participate in the presale?</dt>
-      <dd>Connect your supported wallet and follow the "How to Buy" instructions on this website.</dd>
-      <dt>What chains will Zenthra support?</dt>
-      <dd>Multiple leading blockchains, with full cross‑chain functionality planned for launch.</dd>
-      <dt>How does the burn mechanism work?</dt>
-      <dd>A small percentage of each transaction is automatically burned, reducing total supply and increasing scarcity over time.</dd>
-    </dl>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2025 Zenthra Project. All rights reserved.</p>
-  <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Use</a></p>
-</footer>
-</body>
-</html>
+      <div class="cta-buttons">
+        <button id="buy-now-btn">Buy Now</button>
+        <button id="connect-wallet-btn">Connect Wallet</button>
+      </div>
+    </div>
+  </section>
