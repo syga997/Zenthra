@@ -5,38 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zenthra Presale</title>
   <style>
-    body { background-color: #222; color: #ddd; font-family: Arial, sans-serif; margin: 20px; }
-    header { text-align: center; margin-bottom: 40px; }
-    h1 { color: #a259ff; }
-    #countdown { font-size: 2em; margin-top: 10px; }
+    /* Alap body és színvilág */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1c1c27; /* antracit */
+      color: #ddd;
+    }
+    header {
+      background: linear-gradient(90deg, #5c00e6, #220057); /* királylila */
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+    header nav a:hover {
+      color: #a259ff;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #a259ff;
+    }
+    #countdown {
+      font-size: 2em;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    /* Mobil menü egyszerűen */
+    @media (max-width: 600px) {
+      header nav a {
+        display: block;
+        margin: 10px 0;
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Zenthra - The Future Is Now</h1>
-    <p>When the countdown hits zero, something good happens...</p>
-    <div id="countdown">Loading countdown...</div>
-  </header>
-  <script>
-    // Egyszerű visszaszámláló példa
-    const countdownEl = document.getElementById('countdown');
-    const targetDate = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24 óra múlva
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-      if (diff <= 0) {
-        countdownEl.textContent = 'The event has started!';
-        clearInterval(intervalId);
-        return;
-      }
-      const hours = Math.floor(diff / 1000 / 60 / 60);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      countdownEl.textContent = `${hours}h ${minutes}m ${seconds}s`;
+<header>
+  <nav>
+    <a href="#presale-info">Presale Info</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#how-to-buy">How to Buy</a>
+    <a href="#whitepaper">Whitepaper</a>
+  </nav>
+</header>
+
+<section id="presale-info">
+  <h1>Zenthra - The Future Is Now</h1>
+  <p>When the countdown hits zero, something good happens...</p>
+  <div id="countdown">Loading countdown...</div>
+</section>
+
+<section id="tokenomics">
+  <h2>Tokenomics</h2>
+  <p>Coming soon: Brutális, 4D-s grafikonok, de most még csak a kezdet.</p>
+</section>
+
+<section id="roadmap">
+  <h2>Roadmap</h2>
+  <p>Izgalmas, animált roadmap érkezik hamarosan.</p>
+</section>
+
+<section id="how-to-buy">
+  <h2>How to Buy</h2>
+  <p>Simple steps to join the presale — coming soon.</p>
+</section>
+
+<section id="whitepaper">
+  <h2>Whitepaper</h2>
+  <p>Download the detailed whitepaper to understand the project deeply.</p>
+  <button onclick="window.open('https://yourwhitepaperlink.com', '_blank')">Download Whitepaper</button>
+</section>
+
+<script>
+  // Visszaszámláló újra
+  const countdownEl = document.getElementById('countdown');
+  const targetDate = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24 óra múlva
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+    if (diff <= 0) {
+      countdownEl.textContent = 'The event has started!';
+      clearInterval(intervalId);
+      return;
     }
-    updateCountdown();
-    const intervalId = setInterval(updateCountdown, 1000);
-  </script>
+    const hours = Math.floor(diff / 1000 / 60 / 60);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    countdownEl.textContent = `${hours}h ${minutes}m ${seconds}s`;
+  }
+  updateCountdown();
+  const intervalId = setInterval(updateCountdown, 1000);
+</script>
+
 </body>
 </html>
