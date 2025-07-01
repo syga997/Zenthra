@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zenthra Presale</title>
+  <style>
+    body { background-color: #222; color: #ddd; font-family: Arial, sans-serif; margin: 20px; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { color: #a259ff; }
+    #countdown { font-size: 2em; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Zenthra - The Future Is Now</h1>
+    <p>When the countdown hits zero, something good happens...</p>
+    <div id="countdown">Loading countdown...</div>
+  </header>
+  <script>
+    // Egyszerű visszaszámláló példa
+    const countdownEl = document.getElementById('countdown');
+    const targetDate = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24 óra múlva
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        countdownEl.textContent = 'The event has started!';
+        clearInterval(intervalId);
+        return;
+      }
+      const hours = Math.floor(diff / 1000 / 60 / 60);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      countdownEl.textContent = `${hours}h ${minutes}m ${seconds}s`;
+    }
+    updateCountdown();
+    const intervalId = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
